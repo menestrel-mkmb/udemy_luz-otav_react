@@ -10,6 +10,11 @@ class App extends Component {
       name: 'Michael'
     }
   }
+
+  handlePClick() {
+    const { name } = this.state;
+    console.log(`Clicou no parágrafo ${name}!`);
+  }
   render() {
     const { name } = this.state;
 
@@ -17,7 +22,7 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <p>
+          <p onClick={this.handlePClick}>
             Olá mundo
           </p>
           <a
