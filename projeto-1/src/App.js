@@ -9,7 +9,8 @@ class App extends Component {
     this.handlePClick = this.handlePClick.bind(this);
 
     this.state = {
-      name: 'Michael'
+      name: 'Michael',
+      counter: 0
     }
   }
 
@@ -17,6 +18,12 @@ class App extends Component {
     this.setState({
       name: 'Nome alterado no state pelo event'
     });
+  }
+
+  handleAClick = (e) => {
+    e.preventDefault();
+    const { counter } = this.state;
+    this.setState({ counter: counter+1 });
   }
   render() {
     const { name } = this.state;
@@ -26,13 +33,14 @@ class App extends Component {
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <p onClick={this.handlePClick}>
-            Olá mundo
+            Olá mundo {this.state.counter}!
           </p>
           <a
             className="App-link"
             href="https://reactjs.org"
             target="_blank"
             rel="noopener noreferrer"
+            onClick={this.handleAClick}
           >
             {name}
           </a>
