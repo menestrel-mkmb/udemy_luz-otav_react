@@ -5,7 +5,7 @@ import { Component } from 'react';
 class App extends Component {
   constructor(props) {
     super(props);
-    
+
     this.handlePClick = this.handlePClick.bind(this);
 
     this.state = {
@@ -14,8 +14,9 @@ class App extends Component {
   }
 
   handlePClick() {
-    const { name } = this.state;
-    console.log(`Clicou no parágrafo ${name}!`);
+    this.setState({
+      name: 'Nome alterado no state pelo event'
+    });
   }
   render() {
     const { name } = this.state;
