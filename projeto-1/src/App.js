@@ -3,7 +3,16 @@ import './App.css';
 import { Component } from 'react';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      name: 'Michael'
+    }
+  }
   render() {
+    const { name } = this.state;
+
     return (
       <div className="App">
         <header className="App-header">
@@ -17,7 +26,7 @@ class App extends Component {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Learn React
+            {name}
           </a>
         </header>
       </div>
