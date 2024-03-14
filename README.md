@@ -12,6 +12,8 @@ Esse comando é uma automação e quick-start de ferramentas como o babel, webpa
 
 Para exemplificar a utilização de scripts dispostos dentro do ```package.json```, pode-se alterar um conteúdo dentro do ```App.js``` e ao utilizar o script ```npm run build``` uma pasta build será criada com o contexto estático necessário para ser utilizado no navegador. O teste foi feito localmente utilizando o LiveServer, em similitude ao script do browsersync no Gulp.
 
+Embora o conteúdo estático na pasta build seja substituído ao executar o script, caso seja necessário adicionar algum componente estático ao site, pode-se editar o arquivo final (embora minificado) e fazer uso de um site que não é inteiramente iterado pelo React. O parágrafo disposto contempla apenas a definição de que todas as ferramentas encadeadas (toolchain) da biblioteca são apenas uma forma de automatizar a vida do desenvolvedor, e que a web continua utilizando apenas arquivos: ```.html .css .js```, e conteúdo estático como imagens e vetores.
+
 ### 1.1 Estado e Hooks com componentes
 
 Antigamente, o React tinha uma separação necessária de estado para componentes funcionais e de classes, e componentes stateless e stateful, entretanto atualmente o React faz uso de estados a partir de Hooks, sendo assim houve a mitigação desses conceitos, onde componentes funcionais ou de classe já possuem as extensões válidas e capacidade de retornar JSX para a transpilação, com isso essa necessidade de separação de componente é depreciada.
