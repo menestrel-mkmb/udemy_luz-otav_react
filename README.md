@@ -82,3 +82,11 @@ return
 ```
 
 É importante notar que o componente pai continuou recebendo o discriminatório de unicidade ```key``` para o mapeamento interno do React.
+
+### 1.5 Ciclo de vida de componentes
+
+Para a atualização parcial e otimização de performance dos componentes na SPA, é necessário uma forma de avaliar se o conteúdo mudou, como fazer isso de forma segura e atualizar parcialmente para evitar repetir processamento desnecessário, esse é conceito de ciclo de vida.
+
+Como ciclo básico tem-se a separação do componente em montagem ```mounting```, onde de exemplo tem-se a utilização do construtor ```constructor```, da renderização ```render``` e da montagem ```componentDidMount``` para simbolizar que o componente chegou em um primeiro estado semântico completo; na atualização ```updating``` tem-se de exemplo a indicação de atualização ```shouldComponentUpdate```, a finalização da atualização ```componentDidUpdate```, a renderização ```render``` da atualização; na desmontagem ```unmounting``` tem-se a indicação de desconstrução ```componentWillUnmount```. Há ainda a indicação de erro ```componentDidCatch``` no ciclo de vida ```errorhandling```.
+
+Embora seja fácil evidenciar alguns métodos de componentes pelo ciclo de vida, isso é considerado legado, e a utilização desses conceitos foram diluídas em outras vertentes, como por exemplo o uso de ```fallback={component}``` para manter os princípios de bom design enquanto aguarda as dependências do escopo.
