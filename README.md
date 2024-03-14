@@ -4,7 +4,7 @@ Esse repositório tem como objetivo documentar o básico já conhecido de React 
 
 [Link para o curso](https://www.udemy.com/course/curso-de-reactjs-nextjs-completo-do-basico-ao-avancado/)
 
-## 1.0 Inicializando um projeto react
+## 1.0 - Inicializando um projeto react
 
 Dependendo do toolchain desejado, deve-se utilizar templates diferentes, no caso inicial o comando ```npx create-react-app .``` foi escolhido para o script padrão (e atualmente não recomendado) para manter a coerência com o curso, ao invés dos atuais projetos com templates do next.js, remix ou vite.
 
@@ -14,7 +14,7 @@ Para exemplificar a utilização de scripts dispostos dentro do ```package.json`
 
 Embora o conteúdo estático na pasta build seja substituído ao executar o script, caso seja necessário adicionar algum componente estático ao site, pode-se editar o arquivo final (embora minificado) e fazer uso de um site que não é inteiramente iterado pelo React. O parágrafo disposto contempla apenas a definição de que todas as ferramentas encadeadas (toolchain) da biblioteca são apenas uma forma de automatizar a vida do desenvolvedor, e que a web continua utilizando apenas arquivos: ```.html .css .js```, e conteúdo estático como imagens e vetores.
 
-### 1.1 Estado e Hooks com componentes
+### 1.1 - Estado e Hooks com componentes
 
 Antigamente, o React tinha uma separação necessária de estado para componentes funcionais e de classes, e componentes stateless e stateful, entretanto atualmente o React faz uso de estados a partir de Hooks, sendo assim houve a mitigação desses conceitos, onde componentes funcionais ou de classe já possuem as extensões válidas e capacidade de retornar JSX para a transpilação, com isso essa necessidade de separação de componente é depreciada.
 
@@ -28,7 +28,7 @@ Além de ser necessário declarar qualquer estado inicial sobreescrevendo o obje
 
 Após tais normatizas efetuadas, tornava-se possível fazer quaisquer manipulação dentro do JSX e ver seu efeito dentro do virtual DOM atráves dos eventos sintéticos como em ```onClick={this.internalFunctionClass}```, visto que o método padrão de ```render``` é executado a cada troca de estado, para garantir a conformidade dos valores atuais do componente e o renderizado pelo virtual DOM.
 
-### 1.3 Arrow functions e valores nos states
+### 1.3 - Arrow functions e valores nos states
 
 A utilização de arrow function dentro de uma classe é recomendada pela não criação de um escopo interno, ou seja, o this automaticamente é apontado para o elemento classe pai, onde o bind se torna desnecessário para métodos próprios.
 
@@ -36,7 +36,7 @@ Para métodos que denotam o ciclo de vida do componente e que são usuais do Rea
 
 Entretanto, há uma alternativa para evitar a utilização de construtores para o estado nas funções próprias e eliminar também a necessidade de bind entre os escopos: a utilização de class fields.
 
-### 1.4 Mapeando listas
+### 1.4 - Mapeando listas
 
 Um cenário comum da necessidade de utilização do conceito de SPA é a dinamicidade parcial de páginas, no React isso é visto com a iteração de elementos em JS dentro do JSX, separados pela tag {}.
 
@@ -87,7 +87,7 @@ return
 
 É importante notar que o componente pai continuou recebendo o discriminatório de unicidade ```key``` para o mapeamento interno do React.
 
-### 1.5 Ciclo de vida de componentes
+### 1.5 - Ciclo de vida de componentes
 
 Para a atualização parcial e otimização de performance dos componentes na SPA, é necessário uma forma de avaliar se o conteúdo mudou, como fazer isso de forma segura e atualizar parcialmente para evitar repetir processamento desnecessário, esse é conceito de ciclo de vida.
 
@@ -103,7 +103,7 @@ Um padrão utilizado para determinar manipulações em componentes é criar mét
 
 Representação gráfica indicando documentação: [Diagrama de ciclo de vida](https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/)
 
-## 2 Utilizando dados dinâmicos
+## 2.0 - Utilizando dados dinâmicos
 
 A grande necessidade do conceito de SPA, a manipulação de um DOM Virtual e a atualização parcial de páginas se deu para melhorar o uso e experiência na web sob o contexto de páginas dinâmicas, em que objetos interativos variam com filtros, buscas e outros fatores, seja um post de um blog a uma página em um e-commerce, a web estática é só um envelope para seu real valor: dados dinâmicos.
 
