@@ -24,8 +24,61 @@ Além de ser necessário declarar qualquer estado inicial sobreescrevendo o obje
 
 Após tais normatizas efetuadas, tornava-se possível fazer quaisquer manipulação dentro do JSX e ver seu efeito dentro do virtual DOM atráves dos eventos sintéticos como em ```onClick={this.internalFunctionClass}```, visto que o método padrão de ```render``` é executado a cada troca de estado, para garantir a conformidade dos valores atuais do componente e o renderizado pelo virtual DOM.
 
+### 1.3 Arrow functions e valores nos states
+
 A utilização de arrow function dentro de uma classe é recomendada pela não criação de um escopo interno, ou seja, o this automaticamente é apontado para o elemento classe pai, onde o bind se torna desnecessário para métodos próprios.
 
 Para métodos que denotam o ciclo de vida do componente e que são usuais do React, não se tem esse tipo de controle.
 
 Entretanto, há uma alternativa para evitar a utilização de construtores para o estado nas funções próprias e eliminar também a necessidade de bind entre os escopos: a utilização de class fields.
+
+### 1.4 Mapeando listas
+
+Um cenário comum da necessidade de utilização do conceito de SPA é a dinamicidade parcial de páginas, no React isso é visto com a iteração de elementos em JS dentro do JSX, separados pela tag {}.
+
+Outro ponto importante é que, para a garantia de transpilação compatível e otimização de performance da biblioteca, a atribuição de um referencial único ```key``` é utilizada.
+
+Assim, ao querer iterar sobre um objeto de posts, por exemplo, no componente pai retornado ao JSX é necessário mapear unicamente, conforme disposto no código:
+
+```
+this.state = {
+    posts: [
+        {
+            id: 1,
+            title: 'Título 1',
+            text: 'Lorem1'
+        },
+        {
+            id: 2,
+            title: 'Título 2',
+            text: 'Lorem2'
+        },
+        {
+            id: 3,
+            title: 'Título 3',
+            text: 'Lorem3'
+        }
+    ]
+}
+
+return
+(<div>
+{posts.map( post => <h1 key={post.id}>{post.title}</h1>)}
+</div>)
+```
+
+Para o caso usual de retorno de componentes múltiplos, a regra de componente é herdada, sendo necessário o envelopamento de múltiplos componentes em um único filho, nem que seja o fragmento vazio ```<>{ children }</>```.
+
+```
+return
+(<div>
+{posts.map( post => (
+    <div key={post.id}>
+        <h1>{post.title}</h1>
+        <p>{post.text}</p>
+    </div>
+))}
+</div>)
+```
+
+É importante notar que o componente pai continuou recebendo o discriminatório de unicidade ```key``` para o mapeamento interno do React.
