@@ -90,3 +90,9 @@ Para a atualização parcial e otimização de performance dos componentes na SP
 Como ciclo básico tem-se a separação do componente em montagem ```mounting```, onde de exemplo tem-se a utilização do construtor ```constructor```, da renderização ```render``` e da montagem ```componentDidMount``` para simbolizar que o componente chegou em um primeiro estado semântico completo; na atualização ```updating``` tem-se de exemplo a indicação de atualização ```shouldComponentUpdate```, a finalização da atualização ```componentDidUpdate```, a renderização ```render``` da atualização; na desmontagem ```unmounting``` tem-se a indicação de desconstrução ```componentWillUnmount```. Há ainda a indicação de erro ```componentDidCatch``` no ciclo de vida ```errorhandling```.
 
 Embora seja fácil evidenciar alguns métodos de componentes pelo ciclo de vida, isso é considerado legado, e a utilização desses conceitos foram diluídas em outras vertentes, como por exemplo o uso de ```fallback={component}``` para manter os princípios de bom design enquanto aguarda as dependências do escopo.
+
+O uso de ```snapshot```, é outra forma de estado incremental para atualização das propriedades ```props``` de forma parcial, e também faz parte do contexto de ciclo de vida do componente.
+
+Uma forma de garantir que as referências de componentes sempre estejam em estado seguro, é utilizar o contexto usual de JS para timer, em que inicializa-se um objeto ```null```, quando necessário atribui-se um timer para o objeto, para em cenários de atualizações e desconstruções a referência volte a ser nula para evitar uma atualização periódica que algo que já foi removido.
+
+Um padrão utilizado para determinar manipulações em componentes é criar métodos iniciados em ```handle```.
