@@ -10,6 +10,8 @@ Dependendo do toolchain desejado, deve-se utilizar templates diferentes, no caso
 
 Esse comando é uma automação e quick-start de ferramentas como o babel, webpack e bases para o jest, react-testing-library e webvitals, fundamentais para o ecossistema react, em que algumas das justificativas foram aprendidas no curso de automação com Gulp.
 
+Para exemplificar a utilização de scripts dispostos dentro do ```package.json```, pode-se alterar um conteúdo dentro do ```App.js``` e ao utilizar o script ```npm run build``` uma pasta build será criada com o contexto estático necessário para ser utilizado no navegador. O teste foi feito localmente utilizando o LiveServer, em similitude ao script do browsersync no Gulp.
+
 ### 1.1 Estado e Hooks com componentes
 
 Antigamente, o React tinha uma separação necessária de estado para componentes funcionais e de classes, e componentes stateless e stateful, entretanto atualmente o React faz uso de estados a partir de Hooks, sendo assim houve a mitigação desses conceitos, onde componentes funcionais ou de classe já possuem as extensões válidas e capacidade de retornar JSX para a transpilação, com isso essa necessidade de separação de componente é depreciada.
