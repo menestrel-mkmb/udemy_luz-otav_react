@@ -6,20 +6,14 @@ class App extends Component {
     super(props);
     
     this.state = {
-      posts: []
-    }
+      posts: [],
+      counter: 0,
+      timer: null,
+
+    };
   }
 
-  componentDidMount () {
-    this.setState({
-      posts: [
-        {
-          id: 0,
-          title: 'Componente Montado - aguardando API',
-          body: 'componentDidMount'
-        }
-      ]
-    });
+  handleTimeout = () => {
     setTimeout(() => {
       this.setState({
         posts: [
@@ -38,16 +32,33 @@ class App extends Component {
             title: 'Título 3',
             body: 'Lorem3'
           }
-        ]
+        ],
+        counter: this.state.counter + 1,
+        timeoutUpdate: null,
       });
-    }, 5000);
+    }, 1000);
+  }
+
+  componentDidMount () {
+    this.handleTimeout();
+  }
+
+  componentDidUpdate() {
+    this.handleTimeout();
+  }
+
+  componentWillUnmount() {
+    this.setState({
+      timeoutUpdate: null
+    })
   }
 
   render() {
-    const { posts } = this.state;
+    const { posts, counter } = this.state;
 
     return (
     <div>
+    <h1>Contagem: {counter}</h1>
     {
       posts.map( post =>
         (<div key={post.id}>
