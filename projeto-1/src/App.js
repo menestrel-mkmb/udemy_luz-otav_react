@@ -8,13 +8,13 @@ class App extends Component {
     this.state = {
       posts: [],
       counter: 0,
-      timer: null,
+      timeoutUpdate: null,
 
     };
   }
 
   handleTimeout = () => {
-    setTimeout(() => {
+    this.timeoutUpdate = setTimeout(() => {
       this.setState({
         posts: [
           {
@@ -34,9 +34,9 @@ class App extends Component {
           }
         ],
         counter: this.state.counter + 1,
-        timeoutUpdate: null,
       });
     }, 1000);
+    
   }
 
   componentDidMount () {
@@ -44,13 +44,12 @@ class App extends Component {
   }
 
   componentDidUpdate() {
+    clearTimeout(this.state.timeoutUpdate);
     this.handleTimeout();
   }
 
   componentWillUnmount() {
-    this.setState({
-      timeoutUpdate: null
-    })
+    clearTimeout(this.state.timeoutUpdate);
   }
 
   render() {
