@@ -97,7 +97,7 @@ Embora seja fácil evidenciar alguns métodos de componentes pelo ciclo de vida,
 
 O uso de ```snapshot```, é outra forma de estado incremental para atualização das propriedades ```props``` de forma parcial, e também faz parte do contexto de ciclo de vida do componente.
 
-Uma forma de garantir que as referências de componentes sempre estejam em estado seguro, é utilizar o contexto usual de JS para timer, em que inicializa-se um objeto ```null```, quando necessário atribui-se um timer para o objeto, para em cenários de atualizações e desconstruções a referência volte a ser nula para evitar uma atualização periódica que algo que já foi removido.
+Uma forma de garantir que as referências de componentes sempre estejam em estado seguro, é utilizar o contexto usual de JS para timer, em que inicializa-se um objeto ```null```, quando necessário atribui-se um timer para o objeto, para em cenários de atualizações e desconstruções a referência volte a ser nula utilizando ```clearTimeout(this.state.timerRef)``` para evitar uma atualização periódica que algo que já foi removido.
 
 Um padrão utilizado para determinar manipulações em componentes é criar métodos iniciados em ```handle```.
 
