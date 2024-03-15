@@ -1,53 +1,37 @@
-import logo from './logo.svg';
 import './App.css';
-import { Component } from 'react';
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-
-    this.handlePClick = this.handlePClick.bind(this);
-
-    this.state = {
-      name: 'Michael',
-      counter: 0
-    }
+function App() {
+  const state = {
+    posts: [
+      {
+          id: 1,
+          title: 'Título 1',
+          text: 'Lorem1'
+      },
+      {
+          id: 2,
+          title: 'Título 2',
+          text: 'Lorem2'
+      },
+      {
+          id: 3,
+          title: 'Título 3',
+          text: 'Lorem3'
+      }
+    ]
   }
 
-  handlePClick() {
-    this.setState({
-      name: 'Nome alterado no state pelo event'
-    });
-  }
+  const { posts } = state;
 
-  handleAClick = (e) => {
-    e.preventDefault();
-    const { counter } = this.state;
-    this.setState({ counter: counter+1 });
+  return (
+  <div>
+  {
+    posts.map( post =>
+      <h1 key={post.id}>
+        {post.title}
+      </h1>)
   }
-  render() {
-    const { name } = this.state;
-
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p onClick={this.handlePClick}>
-            Olá mundo {this.state.counter}!
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={this.handleAClick}
-          >
-            {name}
-          </a>
-        </header>
-      </div>
-    );
-  }
+  </div>)
 }
 
 export default App;
