@@ -43,24 +43,32 @@ class App extends Component {
     const { posts } = this.state;
 
     return (
-      <div className='wrapper'>
+      <section className='container posts__sect'>
+      <div className='posts wrapper'>
       {
         posts.map( post =>
           (<div key={post.id} className='post card'>
             <img
               className='post__img'
               src={post.url}
+              alt={post.title}
             />
-            <h1 className='post__title'>
-              {post.title}
-            </h1>
-            <p className='post__body'>
-              {post.body}
-            </p>
+            <div
+              className='post__content'
+            >
+              <h1 className='post__title'>
+                {post.title}
+              </h1>
+              <p className='post__body'>
+                {post.body}
+              </p>
+            </div>
+
           </div>)
           )
       }
-      </div>)
+      </div>
+      </section>)
     }
   }
   
