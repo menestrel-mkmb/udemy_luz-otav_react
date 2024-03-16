@@ -14,6 +14,8 @@ class App extends Component {
   getPosts = async () => {
     const postsJson = await fetch('https://jsonplaceholder.typicode.com/posts')
     .then(response => response.json());
+    const photosJson = await fetch('https://jsonplaceholder.typicode.com/photos')
+    .then(response => response.json());
 
     this.setState({ posts: postsJson });
   }
