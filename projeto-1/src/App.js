@@ -47,6 +47,7 @@ class App extends Component {
     {
       posts.map( post =>
         (<div key={post.id}>
+          <img src={post.url} alt={post.title} />
           <h1>
             {post.title}
           </h1>
