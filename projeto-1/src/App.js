@@ -17,7 +17,16 @@ class App extends Component {
     const photosJson = await fetch('https://jsonplaceholder.typicode.com/photos')
     .then(response => response.json());
 
-    this.setState({ posts: postsJson });
+    let completePosts = [];
+
+    postsJson.forEach((post, index) => {
+      completePosts.push({
+        ...post,
+        ...photosJson[index],
+      })
+    })
+
+    this.setState({ posts: completePosts });
   }
 
   componentDidMount () {
