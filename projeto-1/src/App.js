@@ -11,10 +11,11 @@ class App extends Component {
     };
   }
 
-  getPosts = () => {
-    fetch('https://jsonplaceholder.typicode.com/posts')
-    .then(response => response.json())
-    .then(posts => this.setState({ posts }));
+  getPosts = async () => {
+    const postsJson = await fetch('https://jsonplaceholder.typicode.com/posts')
+    .then(response => response.json());
+
+    this.setState({ posts: postsJson });
   }
 
   componentDidMount () {
