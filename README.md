@@ -116,3 +116,27 @@ fetch('https://jsonplaceholder.typicode.com/posts')
 ```
 
 Uma API genérica e padrão (JSONPlaceholder typicode) foi utilizada para a demonstração de uma requisição externa, de um arquivo JSON, e sob o contexto de pipeline assíncrono já estudado no Gulp, tem-se o contexto de encadeamento de funções executadas sequencialmente à medida que as promessas (Promises) sejam recebidas pelo navegador.
+
+Para demonstrar a iteração de múltiplas requisições, utilizou-se outro endpoint da API para concatenar fotos aos posts, e unificar em um objeto dentro do state, conforme código a seguir:
+
+```
+getPosts = async () => {
+    const postsJson = await fetch('https://jsonplaceholder.typicode.com/posts')
+    .then(response => response.json());
+    const photosJson = await fetch('https://jsonplaceholder.typicode.com/photos')
+    .then(response => response.json());
+
+    let completePosts = [];
+
+    postsJson.forEach((post, index) => {
+      completePosts.push({
+        ...post,
+        ...photosJson[index],
+      })
+    })
+
+    this.setState({ posts: completePosts });
+  }
+```
+
+Assim, disposto do objeto com a propriedade ```url``` com o link da imagem, é possível iterar no JSX e conferir o resultado no card com o conteúdo do endpoint /posts e do /photos
