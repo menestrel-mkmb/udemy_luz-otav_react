@@ -160,3 +160,12 @@ Para isso, dentro da pasta ```src/components``` há a criação desses component
 │   │   │   ├── index.jsx
 ```
 
+E por padrão, dentro do arquivo ```PostCard/index.jsx```, uma função exportada padrão do componente com a estrutura, e seus requisitos de props, bem como o retorno do documento JSX:
+
+```
+export default function PostCard(props){
+    return(<>JSX</>)
+}
+```
+
+Após utilizar esse padrão, nota-se que o uso da chave única não é mais necessário dentro do componente visual, e o mesmo é utilizado na chamada de seu componente para uso interno do React.

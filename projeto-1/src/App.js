@@ -48,7 +48,7 @@ class App extends Component {
       <div className='posts wrapper'>
       {
         posts.map( 
-          post => <PostCard post={post} key={post.id}/>)
+          post => <PostCard post={post} key={post.id} />)
       }
       </div>
       </section>)
