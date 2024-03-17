@@ -1,5 +1,6 @@
 import './App.css';
 import { Component } from 'react';
+import PostCard from './components';
 
 class App extends Component {
   constructor(props) {
@@ -46,26 +47,8 @@ class App extends Component {
       <section className='container posts__sect'>
       <div className='posts wrapper'>
       {
-        posts.map( post =>
-          (<div key={post.id} className='post card'>
-            <img
-              className='post__img'
-              src={post.url}
-              alt={post.title}
-            />
-            <div
-              className='post__content'
-            >
-              <h1 className='post__title'>
-                {post.title}
-              </h1>
-              <p className='post__body'>
-                {post.body}
-              </p>
-            </div>
-
-          </div>)
-          )
+        posts.map( 
+          post => <PostCard post={post} key={post.id}/>)
       }
       </div>
       </section>)
