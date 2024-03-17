@@ -139,4 +139,24 @@ getPosts = async () => {
   }
 ```
 
-Assim, disposto do objeto com a propriedade ```url``` com o link da imagem, é possível iterar no JSX e conferir o resultado no card com o conteúdo do endpoint /posts e do /photos
+Assim, disposto do objeto com a propriedade ```url``` com o link da imagem, é possível iterar no JSX e conferir o resultado no card com o conteúdo dos endpoints ```/posts``` e ```/photos```.
+
+## 3.0 - Organização no React
+
+O React é uma biblioteca declarativa em componentes, o que significa que tudo que é implícito deve ser evitado, e tem-se o conceito de componentização para agregar o máximo de vantagem ao reutilizar semântica similar em diferentes partes.
+
+Com isso há o contexto de separação de nós ```nodes``` em algumas vertentes: modularização, extensão e outros aspectos como responsabilidade única, contexto único, tipos de hooks e etc; entretanto, esses outros aspectos são convenções cujos se encontram mais próximas do conceito de arquitetura no React, e devem ser abordadas em uma parte futura dessa documentação.
+
+Sobre a modularização e extensividade, tem-se o interesse em abstrair as divisões fundamentais de uma aplicação, seja na separação de objetos visuais, regras de negócio, componentes funcionais para serviços, middlewares de verificação, parser de serviços e outros.
+
+Sendo assim, para a aplicação desse conceito no exemplo de projeto atual, deve-se separar os componentes visuais, dos quais podem ser divididos em: container de lista, item de lista (card) e permitindo ainda subdivisões dentro do item como: título, descrição e miniatura de chamada.
+
+Para isso, dentro da pasta ```src/components``` há a criação desses componentes, em uma pasta com seu nome, com um arquivo chamado ```index.js``` com as variações: ```.js .jsx .ts e .tsx```, para javascript, componente visual js, typescript e componente visual ts, respectivamente, como o exemplo abaixo:
+
+```
+│  src
+│   ├── components
+│   │   ├── PostCard
+│   │   │   ├── index.jsx
+```
+
