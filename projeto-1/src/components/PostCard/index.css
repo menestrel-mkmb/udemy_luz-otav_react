@@ -1,0 +1,29 @@
+.post {
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba( 0, 0, 0, .2 );
+  
+    width: clamp(280px, 100%, 350px);
+  
+    transition: transform .3s ease-in-out;
+  }
+  
+  .post:hover {
+    scale: 1.05;
+  }
+  
+  .post__img {
+    height: aspect-ratio( 16 / 9 );
+    width: clamp(280px, 100%, 350px);
+  
+    margin: 0 auto;
+  }
+  
+  .post__content {
+    font-size: clamp(.5rem,1rem,2rem);
+  
+    padding: .5rem 1rem;
+  }
+  
+  .post__title {
+    font-size: clamp(1rem,1.5rem,3rem);
+  }
