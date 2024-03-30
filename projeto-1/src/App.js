@@ -1,37 +1,23 @@
 import './App.css';
 import { Component } from 'react';
-import PostCard from './components';
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    
-    this.state = {
-      posts: [],
-      counter: 0,
-    };
-  }
+import { loadPosts } from './utils/load-posts';
+import Posts from './components/Posts';
+
+class App extends Component {  
+  state = {
+    posts: [],
+    counter: 0,
+  };
 
   getPosts = async () => {
-    const postsJson = await fetch('https://jsonplaceholder.typicode.com/posts')
-    .then(response => response.json());
-    const photosJson = await fetch('https://jsonplaceholder.typicode.com/photos')
-    .then(response => response.json());
-
-    let completePosts = [];
-
-    postsJson.forEach((post, index) => {
-      completePosts.push({
-        ...post,
-        ...photosJson[index],
-      })
-    })
+    const completePosts = await loadPosts();
 
     this.setState({ posts: completePosts });
   }
 
-  componentDidMount () {
-    this.getPosts();
+  async componentDidMount () {
+    await this.getPosts();
   }
 
   componentDidUpdate() {
@@ -45,14 +31,9 @@ class App extends Component {
 
     return (
       <section className='container posts__sect'>
-      <div className='posts wrapper'>
-      {
-        posts.map( 
-          post => <PostCard post={post} key={post.id} />)
-      }
-      </div>
+        <Posts posts={posts} />
       </section>)
-    }
   }
+}
   
   export default App;
