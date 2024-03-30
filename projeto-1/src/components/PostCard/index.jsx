@@ -1,3 +1,5 @@
+import './index.css';
+
 export default function PostCard(props) {
     const { post } = props;
 
