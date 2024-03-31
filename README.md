@@ -99,7 +99,13 @@ O uso de ```snapshot```, é outra forma de estado incremental para atualização
 
 Uma forma de garantir que as referências de componentes sempre estejam em estado seguro, é utilizar o contexto usual de JS para timer, em que inicializa-se um objeto ```null```, quando necessário atribui-se um timer para o objeto, para em cenários de atualizações e desconstruções a referência volte a ser nula utilizando ```clearTimeout(this.state.timerRef)``` para evitar uma atualização periódica que algo que já foi removido.
 
-Um padrão utilizado para determinar manipulações em componentes é criar métodos iniciados em ```handle```.
+Um padrão utilizado para determinar manipulações em componentes é criar métodos iniciados em ```handle```. Outro ponto é a utilização do método async-await para Promessas feitas dentro de funções de ciclo de vida como demonstrado em:
+
+```
+async componentDidMount () {
+    await this.getPosts();
+}
+```
 
 Representação gráfica indicando documentação: [Diagrama de ciclo de vida](https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/)
 
