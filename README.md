@@ -157,13 +157,14 @@ Sobre a modularização e extensividade, tem-se o interesse em abstrair as divis
 
 Sendo assim, para a aplicação desse conceito no exemplo de projeto atual, deve-se separar os componentes visuais, dos quais podem ser divididos em: container de lista, item de lista (card) e permitindo ainda subdivisões dentro do item como: título, descrição e miniatura de chamada.
 
-Para isso, dentro da pasta ```src/components``` há a criação desses componentes, em uma pasta com seu nome, com um arquivo chamado ```index.js``` com as variações: ```.js .jsx .ts e .tsx```, para javascript, componente visual js, typescript e componente visual ts, respectivamente, como o exemplo abaixo:
+Para isso, dentro da pasta ```src/components``` há a criação desses componentes, em uma pasta com seu nome, com um arquivo chamado ```index.js``` com as variações: ```.js .jsx .ts e .tsx```, para javascript, componente visual js, typescript e componente visual ts, respectivamente; assim como para o arquivo de estilo, há o padrão ```styles.css``` com as variações ```.module.css, .scss, .module.scss```, ambas convenções demonstradas no exemplo abaixo:
 
 ```
 │  src
 │   ├── components
 │   │   ├── PostCard
 │   │   │   ├── index.jsx
+│   │   │   ├── styles.css
 ```
 
 E por padrão, dentro do arquivo ```PostCard/index.jsx```, uma função exportada padrão do componente com a estrutura, e seus requisitos de props, bem como o retorno do documento JSX:
