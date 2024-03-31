@@ -155,6 +155,8 @@ Com isso há o contexto de separação de nós ```nodes``` em algumas vertentes:
 
 Sobre a modularização e extensividade, tem-se o interesse em abstrair as divisões fundamentais de uma aplicação, seja na separação de objetos visuais, regras de negócio, componentes funcionais para serviços, middlewares de verificação, parser de serviços e outros.
 
+### 3.1 - Componentes
+
 Sendo assim, para a aplicação desse conceito no exemplo de projeto atual, deve-se separar os componentes visuais, dos quais podem ser divididos em: container de lista, item de lista (card) e permitindo ainda subdivisões dentro do item como: título, descrição e miniatura de chamada.
 
 Para isso, dentro da pasta ```src/components``` há a criação desses componentes, em uma pasta com seu nome, com um arquivo chamado ```index.js``` com as variações: ```.js .jsx .ts e .tsx```, para javascript, componente visual js, typescript e componente visual ts, respectivamente; assim como para o arquivo de estilo, há o padrão ```styles.css``` com as variações ```.module.css, .scss, .module.scss```, ambas convenções demonstradas no exemplo abaixo:
@@ -176,3 +178,17 @@ export default function PostCard(props){
 ```
 
 Após utilizar esse padrão, nota-se que o uso da chave única não é mais necessário dentro do componente visual, e o mesmo é utilizado na chamada de seu componente para uso interno do React.
+
+### 3.2 - Templates/Pages
+
+No Next.js e outros frameworks React há uma padronização sobre componentes estruturais que definem o formato de uma seção completa do SPA, podendo citar os arquivos ```page, template e layout``` em suas variações ```.js .jsx .ts e .tsx```, essas estruturas tem funções similares, e a hierarquia é definida pelo framework. No geral, o objetivo é situar a posição de componentes nas páginas, utilizando junto estratégias de renderizações paralelas e parciais. Para exemplificar segue a transformação do Componente App para o Template da página Home:
+
+```
+│  src
+│   ├── components
+│   │   ├── ...
+│   ├── templates
+│   │   ├── Home
+│   │   │   ├── index.jsx
+│   │   │   ├── styles.css
+```
