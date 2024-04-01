@@ -32,25 +32,35 @@ class Posts extends Component {
   }
 
   loadMorePosts = async () => {
+    const { page } = this.state;
+
     this.state = {
       ...this.state,
-      page: this.state.page + 1
+      page: page + 1
     }
+
     await this.getPosts();
   }
 
   render() {
-    const { posts } = this.state;
+    const { allPosts, posts } = this.state;
+    const noMorePosts = posts.length >= allPosts.length;
 
     return (
-    <article className='posts wrapper'>
+    <article className='posts'>
+      <section
+        className='wrapper'
+      >
       {
         posts.map( 
           post => <PostCard post={post} key={post.id} />)
       }
+      </section>
       <Button
+        className='posts__btn'
         text={'Load more posts'}
         onClick={this.loadMorePosts}
+        disabled={noMorePosts}
       />
     </article>
   );}
