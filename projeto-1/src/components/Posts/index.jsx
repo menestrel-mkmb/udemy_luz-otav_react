@@ -15,13 +15,14 @@ class Posts extends Component {
   };
 
   getPosts = async () => {
-    const { page, perPage } = this.state;
+    const { posts, page, perPage } = this.state;
     
     const completePosts = await loadPosts();
 
     this.setState({
-      posts: completePosts.slice(page,
-                  page*perPage + perPage),
+      ...this.state,
+      posts: [ ...posts, ...completePosts.slice(page*perPage,
+        (page + 1)*perPage) ],
       allPosts: completePosts
     });
   }
@@ -30,8 +31,12 @@ class Posts extends Component {
     return await this.getPosts();
   }
 
-  loadMorePosts = () => {
-    console.log('loadMorePosts');
+  loadMorePosts = async () => {
+    this.state = {
+      ...this.state,
+      page: this.state.page + 1
+    }
+    await this.getPosts();
   }
 
   render() {
@@ -44,7 +49,7 @@ class Posts extends Component {
           post => <PostCard post={post} key={post.id} />)
       }
       <Button
-        text={'Load more'}
+        text={'Load more posts'}
         onClick={this.loadMorePosts}
       />
     </article>
