@@ -45,19 +45,21 @@ class Posts extends Component {
 
   handleChange = (e) => {
     const { value } = e.target;
-    const { posts } = this.state;
-    let searchResult = posts;
 
     this.setState({
       ...this.state,
-      searchValue: value,
-      posts: searchResult ?? posts
+      searchValue: value
     });
   }
 
   render() {
     const { allPosts, posts, searchValue } = this.state;
     const noMorePosts = posts.length >= allPosts.length;
+
+    const filteredPosts = !!searchValue ?
+        posts.filter(post => post.title.toLowerCase().includes(
+                                  searchValue.toLowerCase())
+        ) : posts;
 
     return (
     <article className='posts'>
@@ -76,7 +78,7 @@ class Posts extends Component {
         className='wrapper'
       >
       {
-        posts.map( 
+        filteredPosts.map( 
           post => <PostCard post={post} key={post.id} />)
       }
       </section>
