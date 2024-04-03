@@ -10,6 +10,7 @@ class Posts extends Component {
   state = {
     posts: [],
     allPosts: [],
+    searchValue: '',
     page: 0,
     perPage: 10
   };
@@ -42,12 +43,35 @@ class Posts extends Component {
     await this.getPosts();
   }
 
+  handleChange = (e) => {
+    const { value } = e.target;
+    const { posts } = this.state;
+    let searchResult = posts;
+
+    this.setState({
+      ...this.state,
+      searchValue: value,
+      posts: searchResult ?? posts
+    });
+  }
+
   render() {
-    const { allPosts, posts } = this.state;
+    const { allPosts, posts, searchValue } = this.state;
     const noMorePosts = posts.length >= allPosts.length;
 
     return (
     <article className='posts'>
+      <form
+          className='search__form'
+        >
+          <br/><br/>
+          <input
+            type="search"
+            placeholder="Search for post"
+            onChange={this.handleChange}
+            value={searchValue}
+          />
+        </form>
       <section
         className='wrapper'
       >
@@ -56,12 +80,16 @@ class Posts extends Component {
           post => <PostCard post={post} key={post.id} />)
       }
       </section>
-      <Button
-        className='posts__btn'
-        text={'Load more posts'}
-        onClick={this.loadMorePosts}
-        disabled={noMorePosts}
-      />
+      {
+        !searchValue && (
+          <Button
+            className='posts__btn'
+            text={'Load more posts'}
+            onClick={this.loadMorePosts}
+            disabled={noMorePosts}
+          />
+        )
+      }
     </article>
   );}
 }
