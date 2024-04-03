@@ -35,6 +35,7 @@ class Posts extends Component {
   loadMorePosts = async () => {
     const { page } = this.state;
 
+    // eslint-disable-next-line
     this.state = {
       ...this.state,
       page: page + 1
@@ -74,14 +75,27 @@ class Posts extends Component {
             value={searchValue}
           />
         </form>
-      <section
-        className='wrapper'
-      >
-      {
-        filteredPosts.map( 
-          post => <PostCard post={post} key={post.id} />)
+      { filteredPosts.length > 0 && (
+        <section
+          className='wrapper'
+        >
+          {
+            filteredPosts.map( 
+              post => <PostCard post={post} key={post.id} />)
+          }
+        </section>)
       }
-      </section>
+      {
+        filteredPosts.length === 0 && (
+          <section
+            className='wrapper'
+          >
+            <p>
+              Não existem resultados para essa busca
+            </p>
+          </section>
+        )
+      }
       {
         !searchValue && (
           <Button
