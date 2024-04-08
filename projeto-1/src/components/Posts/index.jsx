@@ -68,15 +68,11 @@ class Posts extends Component {
       <form
           className='search__form'
         >
-          <br/><br/>
-          <input
-            type="search"
-            placeholder="Search for post"
-            onChange={this.handleChange}
+          <TextInput
             value={searchValue}
+            handleChange={this.handleChange}
           />
-          <TextInput value={searchValue} onChange={this.handleChange} />
-        </form>
+      </form>
       { filteredPosts.length > 0 && (
         <section
           className='wrapper'
