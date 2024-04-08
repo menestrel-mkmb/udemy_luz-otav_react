@@ -5,6 +5,7 @@ import { loadPosts } from '../../utils/load-posts';
 
 import PostCard from '../PostCard';
 import Button from '../Button';
+import TextInput from '../TextInput';
 
 class Posts extends Component {
   state = {
@@ -74,6 +75,7 @@ class Posts extends Component {
             onChange={this.handleChange}
             value={searchValue}
           />
+          <TextInput value={searchValue} onChange={this.handleChange} />
         </form>
       { filteredPosts.length > 0 && (
         <section
