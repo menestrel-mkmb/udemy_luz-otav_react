@@ -1,0 +1,7 @@
+.text__inp {
+    width: 100%;
+    max-width: 800px;
+    min-width: 300px;
+    
+    padding: .5rem 2rem;
+}
