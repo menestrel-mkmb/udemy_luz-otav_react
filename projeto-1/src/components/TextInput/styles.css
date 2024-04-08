@@ -1,7 +1,5 @@
 .text__inp {
-    width: 100%;
-    max-width: 800px;
-    min-width: 300px;
-    
+    width: clamp(300px, 100%, 800px);
+
     padding: .5rem 2rem;
 }
