@@ -72,6 +72,13 @@ class Posts extends Component {
             value={searchValue}
             handleChange={this.handleChange}
           />
+          {!!searchValue && (
+            <p
+              className='search-result__text'
+            >
+              Search results for: <em>{searchValue}</em>
+            </p>
+          )}
       </form>
       { filteredPosts.length > 0 && (
         <section
