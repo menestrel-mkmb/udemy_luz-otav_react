@@ -249,3 +249,19 @@ Para que um arquivo seja automaticamente reconhecido pelo watcher de teste em ``
 A menor parte de sentido completo em um projeto React é chamada de componente, os testes unitários têm como objetivo fazer verificações de semântica e informativas para saber o que esperar do comportamento e propriedades da instância do VirtualDOM.
 
 É considerado uma boa prática durante a criação de testes a adição do ```expect.assertions(1)``` para garantir que seja executada uma afirmação verdadeira, e retirar o viés de que um teste vazio é considerado um sucesso. Entretanto, o uso normativo de expectativa de asserção se dá em testes assíncronos, em que possa ser relevante avaliar um escopo externo como uma API.
+
+A estrutura de um teste normalmente se dá em um agrupamento definido por ```describe('name', () => { fn[] it() })```, e dentro de cada ```it() ou test()``` é criado o verbete e a instância de teste, e definida a expectativa booleana do teste, conforme demonstrado abaixo:
+
+```
+imports ...
+describe('<Button /> See more posts', () => {
+    it('should render the button with the text "Load more posts"', () => {
+        expect.assertions(1);
+        render(<Button text='Load more posts' />);
+        const button = screen.getByRole('button', { name: /load more posts/i });
+        expect(button).toBeInTheDocument();
+    });
+});
+```
+
+Também é considerado fundamental a descrição do erro em inglês, para facilitar e padronizar projetos internacionais, e manter frases mais curtas e sem idioma com caracteres especiais como a acentuação do português.
