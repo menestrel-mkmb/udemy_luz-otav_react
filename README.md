@@ -243,3 +243,9 @@ Com a utilização de hooks, é possível fazer a interação entre useState e u
 Com o conceito de entregas incrementais, e esteira de desenvolvimento contínuo e integrado, a utilização de testes se tornou fundamental para projetos de escopo maiores. Seja para garantir a consistência de features entre versões, como para verificar casos de borda (edge cases) de funcionamento do sistema, testar verificações fora do uso otimista de chamadas assíncronas, verificações pontuais de interface a partir de dados camuflados, e testar a robustez e a qualidade de anti-frágil de sistemas completos. Para cada funcionalidade e escopo de desenvolvimento há seu tipo de teste, sendo eles: unitários, de integração ou ponta a ponta/E2E (end-to-end).
 
 Para que um arquivo seja automaticamente reconhecido pelo watcher de teste em ```npm test```, deve-se utilizar a convenção de nomenclatura para ```Component.test.js```, possibilitando algumas outras flexões para tipos diferentes de testes, como ```.spec``` para testes unitários, e a extensão ```.jsx``` para componentes visuais.
+
+### 4.1 - Testes Unitários
+
+A menor parte de sentido completo em um projeto React é chamada de componente, os testes unitários têm como objetivo fazer verificações de semântica e informativas para saber o que esperar do comportamento e propriedades da instância do VirtualDOM.
+
+É considerado uma boa prática durante a criação de testes a adição do ```expect.assertions(1)``` para garantir que seja executada uma afirmação verdadeira, e retirar o viés de que um teste vazio é considerado um sucesso. Entretanto, o uso normativo de expectativa de asserção se dá em testes assíncronos, em que possa ser relevante avaliar um escopo externo como uma API.
