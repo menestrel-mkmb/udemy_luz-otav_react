@@ -16,7 +16,9 @@ Embora o conteúdo estático na pasta build seja substituído ao executar o scri
 
 ### 1.1 - Estado e Hooks com componentes
 
-Antigamente, o React tinha uma separação necessária de estado para componentes funcionais e de classes, e componentes stateless e stateful, entretanto atualmente o React faz uso de estados a partir de Hooks, sendo assim houve a mitigação desses conceitos, onde componentes funcionais ou de classe já possuem as extensões válidas e capacidade de retornar JSX para a transpilação, com isso essa necessidade de separação de componente é depreciada.
+Antigamente, o React tinha uma separação necessária de estado para componentes funcionais e de classes; e componentes stateless e stateful, entretanto atualmente o React faz uso de estados a partir de Hooks.
+
+Assim, ocorreu uma mitigação desses conceitos, onde componentes (por padrão, funcionais) já possuem as extensões válidas e capacidade de retornar JSX para a transpilação dos elementos, modificando a estrutura das funções internas de um componente, e tornando depreciado a utilização de construtor, controladores de ciclo de vida (agora é utilizado o hook de useEffect) e a necessidade de vínculo do referencial de objeto this a um bind para utilização de métodos nos eventos sintéticos.
 
 ### 1.2 - Entendendo componentes de classes, bind e states
 
