@@ -151,7 +151,7 @@ Assim, disposto do objeto com a propriedade ```url``` com o link da imagem, é p
 
 O React é uma biblioteca declarativa em componentes, o que significa que tudo que é implícito deve ser evitado, e tem-se o conceito de componentização para agregar o máximo de vantagem ao reutilizar semântica similar em diferentes partes.
 
-Com isso há o contexto de separação de nós ```nodes``` em algumas vertentes: modularização, extensão e outros aspectos como responsabilidade única, contexto único, tipos de hooks e etc; entretanto, esses outros aspectos são convenções cujos se encontram mais próximas do conceito de arquitetura no React, e devem ser abordadas em uma parte futura dessa documentação.
+Com isso há o contexto de separação de nós ```nodes``` em algumas vertentes: modularização, extensão e outros aspectos como responsabilidade única, contexto único, tipos de hooks e etc; entretanto, esses outros aspectos são convenções cujos encontram-se mais próximas do conceito de arquitetura no React, e devem ser abordadas em uma parte futura dessa documentação.
 
 Sobre a modularização e extensividade, tem-se o interesse em abstrair as divisões fundamentais de uma aplicação, seja na separação de objetos visuais, regras de negócio, componentes funcionais para serviços, middlewares de verificação, parser de serviços e outros.
 
@@ -183,7 +183,7 @@ Após utilizar esse padrão, nota-se que o uso da chave única não é mais nece
 
 O uso de componentes, sejam eles funcionais ou de classe, é o padrão utilizado na biblioteca React, para a transformação do código em HTML é feita uma transpilação para o Virtual DOM, o resultado dessa transpilação resulta em um nó: com nenhum, um ou múltiplos filhos de elementos.
 
-Sendo assim, elementos são o resultado de retorno de um componentes, como a recursão é utilizada no React, o elemento contém elementos filhos, e ao analisar o resultado final em HTMl, vemos que esses elementos são passados a partir de nós de tags HTML; quando um elemento tem mesmo valor semântico, mas diferente valor informativo, a esse é dado o nome de instância.
+Sendo assim, elementos são o resultado de retorno de um componentes, como a recursão é utilizada no React, o elemento contém elementos filhos, e ao analisar o resultado final em HTMl, vemos que esses elementos são passados a partir de nós de tags HTML; quando um elemento tem mesmo valor semântico, mas diferente valor informativo, a esse é dado o nome de instância, para controlar e mapear instâncias, o React faz uso de um identificador único dentro de uma coleção, denominado ````key``.
 
 ```
 │  src
@@ -204,7 +204,13 @@ O intuito desse modelo explicita como o React utiliza as props e seus componente
 
 Considerando a hierarquia de componentes, a transpilação gera um contexto cada vez mais limitado de escopo para os elementos filhos, sendo assim, chamadas para uma hierarquia maior são obrigatoriamente feitas a partir do que é chamado de ```callback functions```, e caso seja necessária manipulação múltipla de um determinado valor, ou se usa a má prática de ```prop drilling```, ou se utiliza a criação de um ```Provider``` de contexto global, como ```Context API``` ou ```Redux```.
 
-### 3.4 - Templates/Pages
+### 3.4 - Eventos Sintéticos
+
+A utilização de ```callbacks``` ou funções de gerenciamento de estado e hooks são controlados a partir de eventos sintéticos, similares aos eventos de DOM. Esses passam por uma camada de abstração para que seja permitida algumas coisas, como: compatibilidade entre plataformas e navegadores, funções específicas definidas pela biblioteca, e funções de similitude aos eventos nativos do HTMl, há ainda a capacidade de executar um overwrite da chamada dos eventos de similitude com o uso de ```event.nativeEvent```.
+
+Há algumas convenções que se diferem dos eventos nativos do HTML, como o uso de camelCase para a nomenclatura dos eventos, e outros detalhes técnicos mais avançados como a propagação de eventos do ```event handler``` precisa ser parada de forma explícita utilizando ```preventDefault()```.
+
+### 3.5 - Templates/Pages
 
 No Next.js e outros frameworks React há uma padronização sobre componentes estruturais que definem o formato de uma seção completa do SPA, podendo citar os arquivos ```page, template e layout``` em suas variações ```.js .jsx .ts e .tsx```, essas estruturas tem funções similares, e a hierarquia é definida pelo framework. No geral, o objetivo é situar a posição de componentes nas páginas, utilizando junto estratégias de renderizações paralelas e parciais. Para exemplificar segue a transformação do Componente App para o Template da página Home:
 
