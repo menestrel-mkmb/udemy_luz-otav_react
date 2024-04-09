@@ -238,6 +238,8 @@ Outro detalhe a ser adicionado é que o estado atual pode ser desconstruído par
 
 Com a utilização de hooks, é possível fazer a interação entre useState e useEffect em "iteração parcial" para garantir esse comportamento de forma simplificada.
 
-## Testes
+## 4 - Testes
 
 Com o conceito de entregas incrementais, e esteira de desenvolvimento contínuo e integrado, a utilização de testes se tornou fundamental para projetos de escopo maiores. Seja para garantir a consistência de features entre versões, como para verificar casos de borda (edge cases) de funcionamento do sistema, testar verificações fora do uso otimista de chamadas assíncronas, verificações pontuais de interface a partir de dados camuflados, e testar a robustez e a qualidade de anti-frágil de sistemas completos. Para cada funcionalidade e escopo de desenvolvimento há seu tipo de teste, sendo eles: unitários, de integração ou ponta a ponta/E2E (end-to-end).
+
+Para que um arquivo seja automaticamente reconhecido pelo watcher de teste em ```npm test```, deve-se utilizar a convenção de nomenclatura para ```Component.test.js```, possibilitando algumas outras flexões para tipos diferentes de testes, como ```.spec``` para testes unitários, e a extensão ```.jsx``` para componentes visuais.
