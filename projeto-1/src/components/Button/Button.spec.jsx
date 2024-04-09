@@ -32,4 +32,13 @@ describe('<Button /> See more posts', () => {
 
         expect(button).toBeDisabled();
     });
+
+    it('should be enabled when disabled is false', () => {
+        expect.assertions(1);
+        render(<Button text='Load more posts' disabled={false} />);
+
+        const button = screen.getByRole('button', { name: /load more posts/i });
+
+        expect(button).not.toBeDisabled();
+    });
 });
