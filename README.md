@@ -181,7 +181,9 @@ Após utilizar esse padrão, nota-se que o uso da chave única não é mais nece
 
 ### 3.2 - Elementos e Instâncias
 
-O uso de componentes, sejam eles funcionais ou de classe, é o padrão utilizado na biblioteca React, para a transformação do código em HTML é feita uma transpilação para o Virtual DOM, o resultado dessa transpilação resulta em um nó: com nenhum, um ou múltiplos filhos de elementos; sendo assim, elementos são o resultado de retorno de um componentes, como a recursão é utilizada no React, o elemento contém elementos filhos, e ao analisar o resultado final em HTMl, vemos que esses elementos são passados a partir de nós de tags HTML; quando um elemento tem mesmo valor semântico, mas diferente valor informativo, a esse é dado o nome de instância.
+O uso de componentes, sejam eles funcionais ou de classe, é o padrão utilizado na biblioteca React, para a transformação do código em HTML é feita uma transpilação para o Virtual DOM, o resultado dessa transpilação resulta em um nó: com nenhum, um ou múltiplos filhos de elementos.
+
+Sendo assim, elementos são o resultado de retorno de um componentes, como a recursão é utilizada no React, o elemento contém elementos filhos, e ao analisar o resultado final em HTMl, vemos que esses elementos são passados a partir de nós de tags HTML; quando um elemento tem mesmo valor semântico, mas diferente valor informativo, a esse é dado o nome de instância.
 
 ```
 │  src
@@ -196,7 +198,13 @@ O uso de componentes, sejam eles funcionais ou de classe, é o padrão utilizado
 
 Adicionando o componente envelope ```Posts``` ao exemplo do item 3.1, e o uso de uma API que retorna 100 posts, tem-se a seguinte abstração. Componentes: Posts e PostCard. Elementos: `<article class="posts">{children}</article>` e `<div class="card">{children}</div>`. Instâncias: 1 Posts e 100 PostCard.
 
-### 3.3 - Templates/Pages
+### 3.3 - Fluxo de dados entre componentes
+
+O intuito desse modelo explicita como o React utiliza as props e seus componentes, e traz implícito uma diretiva importante do React, a direção do fluxo de dados é sempre do pai para o filho.
+
+Considerando a hierarquia de componentes, a transpilação gera um contexto cada vez mais limitado de escopo para os elementos filhos, sendo assim, chamadas para uma hierarquia maior são obrigatoriamente feitas a partir do que é chamado de ```callback functions```, e caso seja necessária manipulação múltipla de um determinado valor, ou se usa a má prática de ```prop drilling```, ou se utiliza a criação de um ```Provider``` de contexto global, como ```Context API``` ou ```Redux```.
+
+### 3.4 - Templates/Pages
 
 No Next.js e outros frameworks React há uma padronização sobre componentes estruturais que definem o formato de uma seção completa do SPA, podendo citar os arquivos ```page, template e layout``` em suas variações ```.js .jsx .ts e .tsx```, essas estruturas tem funções similares, e a hierarquia é definida pelo framework. No geral, o objetivo é situar a posição de componentes nas páginas, utilizando junto estratégias de renderizações paralelas e parciais. Para exemplificar segue a transformação do Componente App para o Template da página Home:
 
