@@ -1,4 +1,5 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import Button from '.';
 
@@ -18,8 +19,17 @@ describe('<Button /> See more posts', () => {
         render(<Button text='Load more posts' onClick={fn} />);
 
         const button = screen.getByRole('button', { name: /load more posts/i });
-        fireEvent.click(button);
-        
+        userEvent.click(button);
+
         expect(fn).toHaveBeenCalledTimes(1);
-    })
+    });
+
+    it('should be disabled when disabled is true', () => {
+        expect.assertions(1);
+        render(<Button text='Load more posts' disabled={true} />);
+
+        const button = screen.getByRole('button', { name: /load more posts/i });
+
+        expect(button).toBeDisabled();
+    });
 });
