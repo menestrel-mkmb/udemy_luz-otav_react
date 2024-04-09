@@ -237,3 +237,7 @@ Como exemplo, após fazer a requisição da API, faz-se necessário encadear pel
 Outro detalhe a ser adicionado é que o estado atual pode ser desconstruído para uma função anônima afim de se obter o estado anterior e as propriedades anteriores como parâmetros a serem comparados.
 
 Com a utilização de hooks, é possível fazer a interação entre useState e useEffect em "iteração parcial" para garantir esse comportamento de forma simplificada.
+
+## Testes
+
+Com o conceito de entregas incrementais, e esteira de desenvolvimento contínuo e integrado, a utilização de testes se tornou fundamental para projetos de escopo maiores. Seja para garantir a consistência de features entre versões, como para verificar casos de borda (edge cases) de funcionamento do sistema, testar verificações fora do uso otimista de chamadas assíncronas, e testar a robustez e a qualidade de anti-frágil de sistemas completos. Para cada funcionalidade e escopo de desenvolvimento há seu tipo de teste, sendo eles: unitários, de integração ou E2E (end-to-end).
