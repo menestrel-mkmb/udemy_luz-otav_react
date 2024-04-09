@@ -228,10 +228,12 @@ No Next.js e outros frameworks React há uma padronização sobre componentes es
 
 ### 3.6 - Ordem de estado
 
-Com o uso de hooks para gerenciamento de estado, tornou-se recomendado encadear ao método de utilização do estado uma função de ```callback``` ao setState de atribuição, para garantir o fluxo de dados em processamento.
+Antes do uso de hooks para gerenciamento de estado, era recomendado encadear ao método de utilização do estado uma função de ```callback``` ao setState de atribuição, para garantir o fluxo de dados em processamento.
 
 Em vulgo, para evitar um efeito indesejado semelhante ao de ```race conditions```, pode-se utilizar o ```params``` opcional de ```setState(state: any, callback?: void fn)```, tornando previsível do caso otimista ter o uso consistente do estado desejado, visto que outros eventos na aplicação podem desencadear outros hooks que tornam essa condição um problema.
 
 Como exemplo, após fazer a requisição da API, faz-se necessário encadear pelo callback a chamada para popular os componentes a serem renderizados, para garantir que o processamento não utilize estados anteriores ao desejado.
 
-Outro detalhe a ser adicionado é que o estado autal pode ser desconstruído para uma função anônima afim de se obter o estado anterior e as propriedades anteriores como parâmetros a serem comparados.
+Outro detalhe a ser adicionado é que o estado atual pode ser desconstruído para uma função anônima afim de se obter o estado anterior e as propriedades anteriores como parâmetros a serem comparados.
+
+Com a utilização de hooks, é possível fazer a interação entre useState e useEffect em "iteração parcial" para garantir esse comportamento de forma simplificada.
