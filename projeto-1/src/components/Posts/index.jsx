@@ -8,13 +8,17 @@ import Button from '../Button';
 import TextInput from '../TextInput';
 
 class Posts extends Component {
-  state = {
-    posts: [],
-    allPosts: [],
-    searchValue: '',
-    page: 0,
-    perPage: 10
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      posts: props.posts,
+      allPosts: [],
+      searchValue: '',
+      page: 0,
+      perPage: 10
+    };
+  }
 
   getPosts = async () => {
     const { posts, page, perPage } = this.state;
