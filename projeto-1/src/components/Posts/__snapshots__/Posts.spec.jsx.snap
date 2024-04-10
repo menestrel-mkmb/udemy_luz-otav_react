@@ -2,96 +2,76 @@
 
 exports[`<Posts /> should match snapshot 1`] = `
 <article
-  class="posts"
+  class="posts wrapper"
 >
-  <form
-    class="search__form"
+  <div
+    class="post card"
   >
-    <input
-      class="text__inp"
-      placeholder="Search for post"
-      type="search"
-      value=""
+    <img
+      alt="Título 1"
+      class="post__img"
+      src="img/img1.jpg"
     />
-  </form>
-  <section
-    class="wrapper"
+    <div
+      class="post__content"
+    >
+      <h1
+        class="post__title"
+      >
+        Título 1
+      </h1>
+      <p
+        class="post__body"
+      >
+        Lorem1
+      </p>
+    </div>
+  </div>
+  <div
+    class="post card"
   >
+    <img
+      alt="Título 2"
+      class="post__img"
+      src="img/img2.jpg"
+    />
     <div
-      class="post card"
+      class="post__content"
     >
-      <img
-        alt="Título 1"
-        class="post__img"
-        src="img/img1.jpg"
-      />
-      <div
-        class="post__content"
+      <h1
+        class="post__title"
       >
-        <h1
-          class="post__title"
-        >
-          Título 1
-        </h1>
-        <p
-          class="post__body"
-        >
-          Lorem1
-        </p>
-      </div>
-    </div>
-    <div
-      class="post card"
-    >
-      <img
-        alt="Título 2"
-        class="post__img"
-        src="img/img2.jpg"
-      />
-      <div
-        class="post__content"
+        Título 2
+      </h1>
+      <p
+        class="post__body"
       >
-        <h1
-          class="post__title"
-        >
-          Título 2
-        </h1>
-        <p
-          class="post__body"
-        >
-          Lorem2
-        </p>
-      </div>
+        Lorem2
+      </p>
     </div>
-    <div
-      class="post card"
-    >
-      <img
-        alt="Título 3"
-        class="post__img"
-        src="img/img3.jpg"
-      />
-      <div
-        class="post__content"
-      >
-        <h1
-          class="post__title"
-        >
-          Título 3
-        </h1>
-        <p
-          class="post__body"
-        >
-          Lorem3
-        </p>
-      </div>
-    </div>
-  </section>
-  <button
-    class="button"
-    disabled=""
+  </div>
+  <div
+    class="post card"
   >
-    Load more posts
-  </button>
+    <img
+      alt="Título 3"
+      class="post__img"
+      src="img/img3.jpg"
+    />
+    <div
+      class="post__content"
+    >
+      <h1
+        class="post__title"
+      >
+        Título 3
+      </h1>
+      <p
+        class="post__body"
+      >
+        Lorem3
+      </p>
+    </div>
+  </div>
 </article>
 `;
