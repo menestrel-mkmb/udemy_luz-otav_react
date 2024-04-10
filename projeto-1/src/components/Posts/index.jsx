@@ -1,5 +1,5 @@
+import { useCallback, useEffect, useState } from 'react';
 import './styles.css';
-import { Component } from 'react';
 
 import { loadPosts } from '../../utils/load-posts';
 
@@ -7,74 +7,64 @@ import PostCard from '../PostCard';
 import Button from '../Button';
 import TextInput from '../TextInput';
 
-class Posts extends Component {
-  constructor(props) {
-    super(props);
+const Posts = (props) => {
+  const [ posts, setPosts ] = useState([]);
+  const [ allPosts, setAllPosts ] = useState(props.posts ?? []);
+  const [ searchValue, setSearchValue ] = useState('');
+  const [ page, setPage ] = useState(0);
+  const [ perPage ] = useState(10);
 
-    this.state = {
-      posts: props.posts,
-      allPosts: [],
-      searchValue: '',
-      page: 0,
-      perPage: 10
-    };
+  const [ filteredPosts, setFilteredPosts ] = useState([]);
+  const [ noMorePosts, setNoMorePosts ] = useState(false);
+
+  const [ firstLoad, setFirstLoad ] = useState(true);
+
+  const initialPage = useCallback(async () => {
+    const postList = await loadPosts();
+    setAllPosts(postList);
+    setPosts(postList.slice(0, perPage));
+    setFilteredPosts(postList.slice(0, perPage));
+
+    setFirstLoad(false);
+  }, [perPage]);
+
+  const changePage = (page) => {
+    setPosts([ ...posts, ...allPosts.slice(page*perPage,
+      (page + 1)*perPage) ]);
   }
 
-  getPosts = async () => {
-    const { posts, page, perPage } = this.state;
-    
-    const completePosts = await loadPosts();
-
-    this.setState({
-      ...this.state,
-      posts: [ ...posts, ...completePosts.slice(page*perPage,
-        (page + 1)*perPage) ],
-      allPosts: completePosts
-    });
+  const loadMorePosts = async () => {
+    changePage(page + 1);
+    setPage(page + 1);
+    setNoMorePosts(posts.length >= allPosts.length && !searchValue);
   }
 
-  async componentDidMount() {
-    return await this.getPosts();
-  }
+  useEffect( () => {
+    if(firstLoad) initialPage();
+  }, [
+    firstLoad,
+    initialPage,
+  ]);
 
-  loadMorePosts = async () => {
-    const { page } = this.state;
+  useEffect( () => {
+    setFilteredPosts(() =>
+      !!searchValue ?
+      allPosts.filter(
+        post =>
+        post.title.toLowerCase().includes(
+          searchValue.toLowerCase())
+      ) : posts
+    );
+  }, [allPosts, posts, searchValue]);
 
-    // eslint-disable-next-line
-    this.state = {
-      ...this.state,
-      page: page + 1
-    }
-
-    await this.getPosts();
-  }
-
-  handleChange = (e) => {
-    const { value } = e.target;
-
-    this.setState({
-      ...this.state,
-      searchValue: value
-    });
-  }
-
-  render() {
-    const { allPosts, posts, searchValue } = this.state;
-    const noMorePosts = posts.length >= allPosts.length;
-
-    const filteredPosts = !!searchValue ?
-        posts.filter(post => post.title.toLowerCase().includes(
-                                  searchValue.toLowerCase())
-        ) : posts;
-
-    return (
+  return (
     <article className='posts'>
       <form
           className='search__form'
         >
           <TextInput
             value={searchValue}
-            handleChange={this.handleChange}
+            handleChange={e=>setSearchValue(e.target.value)}
           />
           {!!searchValue && (
             <p
@@ -89,8 +79,9 @@ class Posts extends Component {
           className='wrapper'
         >
           {
-            filteredPosts.map( 
-              post => <PostCard post={post} key={post.id} />)
+            filteredPosts.map(
+              post => <PostCard post={post} key={post.id} />
+            )
           }
         </section>)
       }
@@ -110,13 +101,13 @@ class Posts extends Component {
           <Button
             className='posts__btn'
             text={'Load more posts'}
-            onClick={this.loadMorePosts}
+            onClick={loadMorePosts}
             disabled={noMorePosts}
           />
         )
       }
     </article>
-  );}
+  );
 }
 
 export default Posts;

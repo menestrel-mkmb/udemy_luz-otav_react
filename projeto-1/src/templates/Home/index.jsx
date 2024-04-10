@@ -8,8 +8,9 @@ class Home extends Component {
     return (
       <section className='container posts__sect'>
         <Posts posts={[]} />
-      </section>)
+      </section>
+    );
   }
 }
-  
+
 export default Home;
