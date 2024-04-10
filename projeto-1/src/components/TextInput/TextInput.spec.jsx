@@ -34,4 +34,15 @@ describe('<TextInput />', () => {
 
     expect(input.value).toBe('');
    });
+
+   it('should match snapshot', () => {
+    const fn = jest.fn();
+    const value = 'testando';
+    const { container } = render(<TextInput handleChange={fn} />);
+
+    const input = screen.getByPlaceholderText('Search for post');
+    userEvent.type(input, value);
+    
+    expect(container.firstChild).toMatchSnapshot();
+   });
 });
