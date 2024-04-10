@@ -22,10 +22,17 @@ describe('<Posts />', () => {
         render(<Posts posts={[]} />);
         expect(screen.queryByRole('heading', { name: /título/i }))
             .not.toBeInTheDocument();
+    });
+
+    it('should render loading state', () => {
+      expect.assertions(1);
+      render(<Posts posts={[]} firstLoad={true} />);
+
+      expect(screen.getByText(/carregando/i)).toBeInTheDocument();
     })
 
     it('should match snapshot', () => {
         const { container } = render(<Posts posts={props} />);
         expect(container.firstChild).toMatchSnapshot();
-    })
+    });
 });
