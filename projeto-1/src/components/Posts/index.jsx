@@ -6,24 +6,20 @@ const Posts = (props) => {
   const { firstLoad, posts } = props;
 
   return (
-    <article className='posts wrapper'>
-
-      { posts.length > 0 ?
-        posts.map(
-          post => <PostCard post={post} key={post.id} />
-        ) : (
-          <section
-            className='wrapper'
-          >
-            { firstLoad ?
-              <p>Carregando...</p> :
-              <p>Não existem resultados para essa busca</p>
-            }
-          </section>
-        )
-      }
+    <article
+      className='posts wrapper'
+    >
+    { posts.length > 0 ?
+      posts.map(
+        post => <PostCard post={post} key={post.id} />
+      ) : (
+        <p>
+          {firstLoad ? 'Carregando...' : 'Não existem resultados para essa busca' }
+        </p>
+      )
+    }
     </article>
-  );
+  )
 }
 
 export default Posts;
