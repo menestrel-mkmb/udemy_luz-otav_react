@@ -41,4 +41,9 @@ describe('<Button /> See more posts', () => {
 
         expect(button).not.toBeDisabled();
     });
+
+    it('should match snapshot', () => {
+        const { container } = render(<Button text='Load more posts' />);
+        expect(container.firstChild).toMatchSnapshot();
+    });
 });
