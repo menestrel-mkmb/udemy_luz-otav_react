@@ -1,0 +1,97 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Posts /> should match snapshot 1`] = `
+<article
+  class="posts"
+>
+  <form
+    class="search__form"
+  >
+    <input
+      class="text__inp"
+      placeholder="Search for post"
+      type="search"
+      value=""
+    />
+  </form>
+  <section
+    class="wrapper"
+  >
+    <div
+      class="post card"
+    >
+      <img
+        alt="Título 1"
+        class="post__img"
+        src="img/img1.jpg"
+      />
+      <div
+        class="post__content"
+      >
+        <h1
+          class="post__title"
+        >
+          Título 1
+        </h1>
+        <p
+          class="post__body"
+        >
+          Lorem1
+        </p>
+      </div>
+    </div>
+    <div
+      class="post card"
+    >
+      <img
+        alt="Título 2"
+        class="post__img"
+        src="img/img2.jpg"
+      />
+      <div
+        class="post__content"
+      >
+        <h1
+          class="post__title"
+        >
+          Título 2
+        </h1>
+        <p
+          class="post__body"
+        >
+          Lorem2
+        </p>
+      </div>
+    </div>
+    <div
+      class="post card"
+    >
+      <img
+        alt="Título 3"
+        class="post__img"
+        src="img/img3.jpg"
+      />
+      <div
+        class="post__content"
+      >
+        <h1
+          class="post__title"
+        >
+          Título 3
+        </h1>
+        <p
+          class="post__body"
+        >
+          Lorem3
+        </p>
+      </div>
+    </div>
+  </section>
+  <button
+    class="button"
+    disabled=""
+  >
+    Load more posts
+  </button>
+</article>
+`;
