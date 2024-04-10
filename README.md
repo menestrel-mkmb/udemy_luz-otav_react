@@ -285,3 +285,9 @@ Sendo esses, respectivamente:
 - iniciar o serviço/`worker` antes para garantir que a camuflagem esteja em nível de execução no início dos testes
 - resetar os dados para garantir que nenhum teste de `POST` tenha alterado os dados ENTRE TESTES e tenha consistência da arquitetura `REST` em continuar `stateless`
 - finalizar o serviço de mock para evitar problemas com a utilização real de outro serviço.
+
+#### 4.1.1 - Problema MSW com Jest e módulos ESM
+
+Durante a execução do curso, as versões atuais dos pacotes não são mais compatíveis de verificação por problema na transpilação de módulo TS pelo babel. Após tentar burlar essas verificações, iniciar um projeto em Vite moderno para tentar contornar e procurar soluções na documentação e na internet, o timeboxing foi atingido, e para o objetivo linear da aprendizagem.
+
+Ao final do curso será avaliada a necessidade de revisão desse módulo, e foi adiada unicamente por já ter explicitado o uso futuro no curso de tal recurso em projetos modernos, caso seja necessário, uma versão legada do projeto será criada nas exatas versões do atual módulo, para a amostragem de código.
