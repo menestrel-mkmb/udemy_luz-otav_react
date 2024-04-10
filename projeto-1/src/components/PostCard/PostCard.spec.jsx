@@ -18,4 +18,9 @@ describe("<PostCard />", () => {
         expect(screen.getByText('Lorem1'))
             .toBeInTheDocument();
     });
+
+    it('should match snapshot', () => {
+        const { container } = render(<PostCard post={props} />);
+        expect(container.firstChild).toMatchSnapshot();
+    });
 });
