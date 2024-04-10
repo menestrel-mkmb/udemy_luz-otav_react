@@ -18,6 +18,12 @@ describe('<Posts />', () => {
             .toHaveAttribute('src', 'img/img3.jpg');
     });
 
+    it('should render no posts', () => {
+        render(<Posts posts={[]} />);
+        expect(screen.queryByRole('heading', { name: /título/i }))
+            .not.toBeInTheDocument();
+    })
+
     it('should match snapshot', () => {
         const { container } = render(<Posts posts={props} />);
         expect(container.firstChild).toMatchSnapshot();
