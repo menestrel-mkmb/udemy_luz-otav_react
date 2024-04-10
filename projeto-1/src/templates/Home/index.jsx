@@ -7,7 +7,7 @@ class Home extends Component {
   render() {
     return (
       <section className='container posts__sect'>
-        <Posts />
+        <Posts posts={[]} />
       </section>)
   }
 }
