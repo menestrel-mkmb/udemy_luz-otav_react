@@ -16,8 +16,8 @@ const Posts = (props) => {
             className='wrapper'
           >
             { firstLoad ?
-              <p>('Carregando...')</p> :
-              <p>('Não existem resultados para essa busca)</p>
+              <p>Carregando...</p> :
+              <p>Não existem resultados para essa busca</p>
             }
           </section>
         )
