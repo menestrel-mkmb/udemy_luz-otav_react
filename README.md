@@ -6,13 +6,13 @@ Esse repositório tem como objetivo documentar o básico já conhecido de React 
 
 ## 1.0 - Inicializando um projeto react
 
-Dependendo do toolchain desejado, deve-se utilizar templates diferentes, no caso inicial o comando ```npx create-react-app .``` foi escolhido para o script padrão (e atualmente não recomendado) para manter a coerência com o curso, ao invés dos atuais projetos com templates do next.js, remix ou vite.
+Dependendo do toolchain desejado, deve-se utilizar templates diferentes, no caso inicial o comando `npx create-react-app .` foi escolhido para o script padrão (e atualmente não recomendado) para manter a coerência com o curso, ao invés dos atuais projetos com templates do next.js, remix ou vite.
 
 Esse comando é uma automação e quick-start de ferramentas como o babel, webpack e bases para o jest, react-testing-library e webvitals, fundamentais para o ecossistema react, em que algumas das justificativas foram aprendidas no curso de automação com Gulp.
 
-Para exemplificar a utilização de scripts dispostos dentro do ```package.json```, pode-se alterar um conteúdo dentro do ```App.js``` e ao utilizar o script ```npm run build``` uma pasta build será criada com o contexto estático necessário para ser utilizado no navegador. O teste foi feito localmente utilizando o LiveServer, em similitude ao script do browsersync no Gulp.
+Para exemplificar a utilização de scripts dispostos dentro do `package.json`, pode-se alterar um conteúdo dentro do `App.js` e ao utilizar o script `npm run build` uma pasta build será criada com o contexto estático necessário para ser utilizado no navegador. O teste foi feito localmente utilizando o LiveServer, em similitude ao script do browsersync no Gulp.
 
-Embora o conteúdo estático na pasta build seja substituído ao executar o script, caso seja necessário adicionar algum componente estático ao site, pode-se editar o arquivo final (embora minificado) e fazer uso de um site que não é inteiramente iterado pelo React. O parágrafo disposto contempla apenas a definição de que todas as ferramentas encadeadas (toolchain) da biblioteca são apenas uma forma de automatizar a vida do desenvolvedor, e que a web continua utilizando apenas arquivos: ```.html .css .js```, e conteúdo estático como imagens e vetores.
+Embora o conteúdo estático na pasta build seja substituído ao executar o script, caso seja necessário adicionar algum componente estático ao site, pode-se editar o arquivo final (embora minificado) e fazer uso de um site que não é inteiramente iterado pelo React. O parágrafo disposto contempla apenas a definição de que todas as ferramentas encadeadas (toolchain) da biblioteca são apenas uma forma de automatizar a vida do desenvolvedor, e que a web continua utilizando apenas arquivos: `.html .css .js`, e conteúdo estático como imagens e vetores.
 
 ### 1.1 - Estado e Hooks com componentes
 
@@ -24,11 +24,11 @@ Assim, ocorreu uma mitigação desses conceitos, onde componentes (por padrão, 
 
 Tinha-se a necessidade de estender a classe de componente para uma classe de JS, onde era necessário passar o construtor da classe, com o construtor de componente (relativo super) e aplicar as propriedades (props) para permitir a manipulação de estado por funções para o correto ciclo de vida de renderização.
 
-Para editar o valor de um componente de estado era necessário fazer o bind de escopo da função interna a classe com ```this.internalFunctionClass = this.internalFunctionClass.bind(this)``` dentro do construtor da classe para referenciar corretamente o maior escopo local (último this).
+Para editar o valor de um componente de estado era necessário fazer o bind de escopo da função interna a classe com `this.internalFunctionClass = this.internalFunctionClass.bind(this)` dentro do construtor da classe para referenciar corretamente o maior escopo local (último this).
 
-Além de ser necessário declarar qualquer estado inicial sobreescrevendo o objeto vazio no próprio construtor. Isso era feito utilizando o ```this.state = { attr = value };```. Para alterar em outro momento do ciclo de vida, a normatiza padrão do React de setState é utilizada (após o bind de escopo): ```this.setState({ attr = newValue });```.
+Além de ser necessário declarar qualquer estado inicial sobreescrevendo o objeto vazio no próprio construtor. Isso era feito utilizando o `this.state = { attr = value };`. Para alterar em outro momento do ciclo de vida, a normatiza padrão do React de setState é utilizada (após o bind de escopo): `this.setState({ attr = newValue });`.
 
-Após tais normatizas efetuadas, tornava-se possível fazer quaisquer manipulação dentro do JSX e ver seu efeito dentro do virtual DOM atráves dos eventos sintéticos como em ```onClick={this.internalFunctionClass}```, visto que o método padrão de ```render``` é executado a cada troca de estado, para garantir a conformidade dos valores atuais do componente e o renderizado pelo virtual DOM.
+Após tais normatizas efetuadas, tornava-se possível fazer quaisquer manipulação dentro do JSX e ver seu efeito dentro do virtual DOM atráves dos eventos sintéticos como em `onClick={this.internalFunctionClass}`, visto que o método padrão de `render` é executado a cada troca de estado, para garantir a conformidade dos valores atuais do componente e o renderizado pelo virtual DOM.
 
 ### 1.3 - Arrow functions e valores nos states
 
@@ -42,7 +42,7 @@ Entretanto, há uma alternativa para evitar a utilização de construtores para 
 
 Um cenário comum da necessidade de utilização do conceito de SPA é a dinamicidade parcial de páginas, no React isso é visto com a iteração de elementos em JS dentro do JSX, separados pela tag {}.
 
-Outro ponto importante é que, para a garantia de transpilação compatível e otimização de performance da biblioteca, a atribuição de um referencial único ```key``` é utilizada.
+Outro ponto importante é que, para a garantia de transpilação compatível e otimização de performance da biblioteca, a atribuição de um referencial único `key` é utilizada.
 
 Assim, ao querer iterar sobre um objeto de posts, por exemplo, no componente pai retornado ao JSX é necessário mapear unicamente, conforme disposto no código:
 
@@ -73,7 +73,7 @@ return
 </div>)
 ```
 
-Para o caso usual de retorno de componentes múltiplos, a regra de componente é herdada, sendo necessário o envelopamento de múltiplos componentes em um único filho, nem que seja o fragmento vazio ```<>{ children }</>```.
+Para o caso usual de retorno de componentes múltiplos, a regra de componente é herdada, sendo necessário o envelopamento de múltiplos componentes em um único filho, nem que seja o fragmento vazio `<>{ children }</>`.
 
 ```
 return
@@ -87,21 +87,21 @@ return
 </div>)
 ```
 
-É importante notar que o componente pai continuou recebendo o discriminatório de unicidade ```key``` para o mapeamento interno do React.
+É importante notar que o componente pai continuou recebendo o discriminatório de unicidade `key` para o mapeamento interno do React.
 
 ### 1.5 - Ciclo de vida de componentes
 
 Para a atualização parcial e otimização de performance dos componentes na SPA, é necessário uma forma de avaliar se o conteúdo mudou, como fazer isso de forma segura e atualizar parcialmente para evitar repetir processamento desnecessário, esse é conceito de ciclo de vida.
 
-Como ciclo básico tem-se a separação do componente em montagem ```mounting```, onde de exemplo tem-se a utilização do construtor ```constructor```, da renderização ```render``` e da montagem ```componentDidMount``` para simbolizar que o componente chegou em um primeiro estado semântico completo; na atualização ```updating``` tem-se de exemplo a indicação de atualização ```shouldComponentUpdate```, a finalização da atualização ```componentDidUpdate```, a renderização ```render``` da atualização; na desmontagem ```unmounting``` tem-se a indicação de desconstrução ```componentWillUnmount```. Há ainda a indicação de erro ```componentDidCatch``` no ciclo de vida ```errorhandling```.
+Como ciclo básico tem-se a separação do componente em montagem `mounting`, onde de exemplo tem-se a utilização do construtor `constructor`, da renderização `render` e da montagem `componentDidMount` para simbolizar que o componente chegou em um primeiro estado semântico completo; na atualização `updating` tem-se de exemplo a indicação de atualização `shouldComponentUpdate`, a finalização da atualização `componentDidUpdate`, a renderização `render` da atualização; na desmontagem `unmounting` tem-se a indicação de desconstrução `componentWillUnmount`. Há ainda a indicação de erro `componentDidCatch` no ciclo de vida `errorhandling`.
 
-Embora seja fácil evidenciar alguns métodos de componentes pelo ciclo de vida, isso é considerado legado, e a utilização desses conceitos foram diluídas em outras vertentes, como por exemplo o uso de ```fallback={component}``` para manter os princípios de bom design enquanto aguarda as dependências do escopo.
+Embora seja fácil evidenciar alguns métodos de componentes pelo ciclo de vida, isso é considerado legado, e a utilização desses conceitos foram diluídas em outras vertentes, como por exemplo o uso de `fallback={component}` para manter os princípios de bom design enquanto aguarda as dependências do escopo.
 
-O uso de ```snapshot```, é outra forma de estado incremental para atualização das propriedades ```props``` de forma parcial, e também faz parte do contexto de ciclo de vida do componente.
+O uso de `snapshot`, é outra forma de estado incremental para atualização das propriedades `props` de forma parcial, e também faz parte do contexto de ciclo de vida do componente.
 
-Uma forma de garantir que as referências de componentes sempre estejam em estado seguro, é utilizar o contexto usual de JS para timer, em que inicializa-se um objeto ```null```, quando necessário atribui-se um timer para o objeto, para em cenários de atualizações e desconstruções a referência volte a ser nula utilizando ```clearTimeout(this.state.timerRef)``` para evitar uma atualização periódica que algo que já foi removido.
+Uma forma de garantir que as referências de componentes sempre estejam em estado seguro, é utilizar o contexto usual de JS para timer, em que inicializa-se um objeto `null`, quando necessário atribui-se um timer para o objeto, para em cenários de atualizações e desconstruções a referência volte a ser nula utilizando `clearTimeout(this.state.timerRef)` para evitar uma atualização periódica que algo que já foi removido.
 
-Um padrão utilizado para determinar manipulações em componentes é criar métodos iniciados em ```handle```. Outro ponto é a utilização do método async-await para Promessas feitas dentro de funções de ciclo de vida como demonstrado em:
+Um padrão utilizado para determinar manipulações em componentes é criar métodos iniciados em `handle`. Outro ponto é a utilização do método async-await para Promessas feitas dentro de funções de ciclo de vida como demonstrado em:
 
 ```
 async componentDidMount () {
@@ -147,13 +147,13 @@ getPosts = async () => {
   }
 ```
 
-Assim, disposto do objeto com a propriedade ```url``` com o link da imagem, é possível iterar no JSX e conferir o resultado no card com o conteúdo dos endpoints ```/posts``` e ```/photos```.
+Assim, disposto do objeto com a propriedade `url` com o link da imagem, é possível iterar no JSX e conferir o resultado no card com o conteúdo dos endpoints `/posts` e `/photos`.
 
 ## 3.0 - Organização no React
 
 O React é uma biblioteca declarativa em componentes, o que significa que tudo que é implícito deve ser evitado, e tem-se o conceito de componentização para agregar o máximo de vantagem ao reutilizar semântica similar em diferentes partes.
 
-Com isso há o contexto de separação de nós ```nodes``` em algumas vertentes: modularização, extensão e outros aspectos como responsabilidade única, contexto único, tipos de hooks e etc; entretanto, esses outros aspectos são convenções cujos encontram-se mais próximas do conceito de arquitetura no React, e devem ser abordadas em uma parte futura dessa documentação.
+Com isso há o contexto de separação de nós `nodes` em algumas vertentes: modularização, extensão e outros aspectos como responsabilidade única, contexto único, tipos de hooks e etc; entretanto, esses outros aspectos são convenções cujos encontram-se mais próximas do conceito de arquitetura no React, e devem ser abordadas em uma parte futura dessa documentação.
 
 Sobre a modularização e extensividade, tem-se o interesse em abstrair as divisões fundamentais de uma aplicação, seja na separação de objetos visuais, regras de negócio, componentes funcionais para serviços, middlewares de verificação, parser de serviços e outros.
 
@@ -161,7 +161,7 @@ Sobre a modularização e extensividade, tem-se o interesse em abstrair as divis
 
 Sendo assim, para a aplicação desse conceito no exemplo de projeto atual, deve-se separar os componentes visuais, dos quais podem ser divididos em: container de lista, item de lista (card) e permitindo ainda subdivisões dentro do item como: título, descrição e miniatura de chamada.
 
-Para isso, dentro da pasta ```src/components``` há a criação desses componentes, em uma pasta com seu nome, com um arquivo chamado ```index.js``` com as variações: ```.js .jsx .ts e .tsx```, para javascript, componente visual js, typescript e componente visual ts, respectivamente; assim como para o arquivo de estilo, há o padrão ```styles.css``` com as variações ```.module.css, .scss, .module.scss```, ambas convenções demonstradas no exemplo abaixo:
+Para isso, dentro da pasta `src/components` há a criação desses componentes, em uma pasta com seu nome, com um arquivo chamado `index.js` com as variações: `.js .jsx .ts e .tsx`, para javascript, componente visual js, typescript e componente visual ts, respectivamente; assim como para o arquivo de estilo, há o padrão `styles.css` com as variações `.module.css, .scss, .module.scss`, ambas convenções demonstradas no exemplo abaixo:
 
 ```
 │  src
@@ -171,7 +171,7 @@ Para isso, dentro da pasta ```src/components``` há a criação desses component
 │   │   │   ├── styles.css
 ```
 
-E por padrão, dentro do arquivo ```PostCard/index.jsx```, uma função exportada padrão do componente com a estrutura, e seus requisitos de props, bem como o retorno do documento JSX:
+E por padrão, dentro do arquivo `PostCard/index.jsx`, uma função exportada padrão do componente com a estrutura, e seus requisitos de props, bem como o retorno do documento JSX:
 
 ```
 export default function PostCard(props){
@@ -185,7 +185,7 @@ Após utilizar esse padrão, nota-se que o uso da chave única não é mais nece
 
 O uso de componentes, sejam eles funcionais ou de classe, é o padrão utilizado na biblioteca React, para a transformação do código em HTML é feita uma transpilação para o Virtual DOM, o resultado dessa transpilação resulta em um nó: com nenhum, um ou múltiplos filhos de elementos.
 
-Sendo assim, elementos são o resultado de retorno de um componentes, como a recursão é utilizada no React, o elemento contém elementos filhos, e ao analisar o resultado final em HTMl, vemos que esses elementos são passados a partir de nós de tags HTML; quando um elemento tem mesmo valor semântico, mas diferente valor informativo, a esse é dado o nome de instância, para controlar e mapear instâncias, o React faz uso de um identificador único dentro de uma coleção, denominado ````key``.
+Sendo assim, elementos são o resultado de retorno de um componentes, como a recursão é utilizada no React, o elemento contém elementos filhos, e ao analisar o resultado final em HTMl, vemos que esses elementos são passados a partir de nós de tags HTML; quando um elemento tem mesmo valor semântico, mas diferente valor informativo, a esse é dado o nome de instância, para controlar e mapear instâncias, o React faz uso de um identificador único dentro de uma coleção, denominado ```key`.
 
 ```
 │  src
@@ -198,23 +198,23 @@ Sendo assim, elementos são o resultado de retorno de um componentes, como a rec
 │   │   │   ├── styles.css
 ```
 
-Adicionando o componente envelope ```Posts``` ao exemplo do item 3.1, e o uso de uma API que retorna 100 posts, tem-se a seguinte abstração. Componentes: Posts e PostCard. Elementos: `<article class="posts">{children}</article>` e `<div class="card">{children}</div>`. Instâncias: 1 Posts e 100 PostCard.
+Adicionando o componente envelope `Posts` ao exemplo do item 3.1, e o uso de uma API que retorna 100 posts, tem-se a seguinte abstração. Componentes: Posts e PostCard. Elementos: `<article class="posts">{children}</article>` e `<div class="card">{children}</div>`. Instâncias: 1 Posts e 100 PostCard.
 
 ### 3.3 - Fluxo de dados entre componentes
 
 O intuito desse modelo explicita como o React utiliza as props e seus componentes, e traz implícito uma diretiva importante do React, a direção do fluxo de dados é sempre do pai para o filho.
 
-Considerando a hierarquia de componentes, a transpilação gera um contexto cada vez mais limitado de escopo para os elementos filhos, sendo assim, chamadas para uma hierarquia maior são obrigatoriamente feitas a partir do que é chamado de ```callback functions```, e caso seja necessária manipulação múltipla de um determinado valor, ou se usa a má prática de ```prop drilling```, ou se utiliza a criação de um ```Provider``` de contexto global, como ```Context API``` ou ```Redux```.
+Considerando a hierarquia de componentes, a transpilação gera um contexto cada vez mais limitado de escopo para os elementos filhos, sendo assim, chamadas para uma hierarquia maior são obrigatoriamente feitas a partir do que é chamado de `callback functions`, e caso seja necessária manipulação múltipla de um determinado valor, ou se usa a má prática de `prop drilling`, ou se utiliza a criação de um `Provider` de contexto global, como `Context API` ou `Redux`.
 
 ### 3.4 - Eventos Sintéticos
 
-A utilização de ```callbacks``` ou funções de gerenciamento de estado e hooks são controlados a partir de eventos sintéticos, similares aos eventos de DOM. Esses passam por uma camada de abstração para que seja permitida algumas coisas, como: compatibilidade entre plataformas e navegadores, funções específicas definidas pela biblioteca, e funções de similitude aos eventos nativos do HTMl, há ainda a capacidade de executar um overwrite da chamada dos eventos de similitude com o uso de ```event.nativeEvent```.
+A utilização de `callbacks` ou funções de gerenciamento de estado e hooks são controlados a partir de eventos sintéticos, similares aos eventos de DOM. Esses passam por uma camada de abstração para que seja permitida algumas coisas, como: compatibilidade entre plataformas e navegadores, funções específicas definidas pela biblioteca, e funções de similitude aos eventos nativos do HTMl, há ainda a capacidade de executar um overwrite da chamada dos eventos de similitude com o uso de `event.nativeEvent`.
 
-Há algumas convenções que se diferem dos eventos nativos do HTML, como o uso de camelCase para a nomenclatura dos eventos, e outros detalhes técnicos mais avançados como a propagação de eventos do ```event handler``` precisa ser parada de forma explícita utilizando ```preventDefault()```.
+Há algumas convenções que se diferem dos eventos nativos do HTML, como o uso de camelCase para a nomenclatura dos eventos, e outros detalhes técnicos mais avançados como a propagação de eventos do `event handler` precisa ser parada de forma explícita utilizando `preventDefault()`.
 
 ### 3.5 - Templates/Pages
 
-No Next.js e outros frameworks React há uma padronização sobre componentes estruturais que definem o formato de uma seção completa do SPA, podendo citar os arquivos ```page, template e layout``` em suas variações ```.js .jsx .ts e .tsx```, essas estruturas tem funções similares, e a hierarquia é definida pelo framework. No geral, o objetivo é situar a posição de componentes nas páginas, utilizando junto estratégias de renderizações paralelas e parciais. Para exemplificar segue a transformação do Componente App para o Template da página Home:
+No Next.js e outros frameworks React há uma padronização sobre componentes estruturais que definem o formato de uma seção completa do SPA, podendo citar os arquivos `page, template e layout` em suas variações `.js .jsx .ts e .tsx`, essas estruturas tem funções similares, e a hierarquia é definida pelo framework. No geral, o objetivo é situar a posição de componentes nas páginas, utilizando junto estratégias de renderizações paralelas e parciais. Para exemplificar segue a transformação do Componente App para o Template da página Home:
 
 ```
 │  src
@@ -228,9 +228,9 @@ No Next.js e outros frameworks React há uma padronização sobre componentes es
 
 ### 3.6 - Ordem de estado
 
-Antes do uso de hooks para gerenciamento de estado, era recomendado encadear ao método de utilização do estado uma função de ```callback``` ao setState de atribuição, para garantir o fluxo de dados em processamento.
+Antes do uso de hooks para gerenciamento de estado, era recomendado encadear ao método de utilização do estado uma função de `callback` ao setState de atribuição, para garantir o fluxo de dados em processamento.
 
-Em vulgo, para evitar um efeito indesejado semelhante ao de ```race conditions```, pode-se utilizar o ```params``` opcional de ```setState(state: any, callback?: void fn)```, tornando previsível do caso otimista ter o uso consistente do estado desejado, visto que outros eventos na aplicação podem desencadear outros hooks que tornam essa condição um problema.
+Em vulgo, para evitar um efeito indesejado semelhante ao de `race conditions`, pode-se utilizar o `params` opcional de `setState(state: any, callback?: void fn)`, tornando previsível do caso otimista ter o uso consistente do estado desejado, visto que outros eventos na aplicação podem desencadear outros hooks que tornam essa condição um problema.
 
 Como exemplo, após fazer a requisição da API, faz-se necessário encadear pelo callback a chamada para popular os componentes a serem renderizados, para garantir que o processamento não utilize estados anteriores ao desejado.
 
@@ -242,15 +242,15 @@ Com a utilização de hooks, é possível fazer a interação entre useState e u
 
 Com o conceito de entregas incrementais, e esteira de desenvolvimento contínuo e integrado, a utilização de testes se tornou fundamental para projetos de escopo maiores. Seja para garantir a consistência de features entre versões, como para verificar casos de borda (edge cases) de funcionamento do sistema, testar verificações fora do uso otimista de chamadas assíncronas, verificações pontuais de interface a partir de dados camuflados, e testar a robustez e a qualidade de anti-frágil de sistemas completos. Para cada funcionalidade e escopo de desenvolvimento há seu tipo de teste, sendo eles: unitários, de integração ou ponta a ponta/E2E (end-to-end).
 
-Para que um arquivo seja automaticamente reconhecido pelo watcher de teste em ```npm test```, deve-se utilizar a convenção de nomenclatura para ```Component.test.js```, possibilitando algumas outras flexões para tipos diferentes de testes, como ```.spec``` para testes unitários, e a extensão ```.jsx``` para componentes visuais.
+Para que um arquivo seja automaticamente reconhecido pelo watcher de teste em `npm test`, deve-se utilizar a convenção de nomenclatura para `Component.test.js`, possibilitando algumas outras flexões para tipos diferentes de testes, como `.spec` para testes unitários, e a extensão `.jsx` para componentes visuais.
 
 ### 4.1 - Testes Unitários
 
 A menor parte de sentido completo em um projeto React é chamada de componente, os testes unitários têm como objetivo fazer verificações de semântica e informativas para saber o que esperar do comportamento e propriedades da instância do VirtualDOM.
 
-É considerado uma boa prática durante a criação de testes a adição do ```expect.assertions(1)``` para garantir que seja executada uma afirmação verdadeira, e retirar o viés de que um teste vazio é considerado um sucesso. Entretanto, o uso normativo de expectativa de asserção se dá em testes assíncronos, em que possa ser relevante avaliar um escopo externo como uma API.
+É considerado uma boa prática durante a criação de testes a adição do `expect.assertions(1)` para garantir que seja executada uma afirmação verdadeira, e retirar o viés de que um teste vazio é considerado um sucesso. Entretanto, o uso normativo de expectativa de asserção se dá em testes assíncronos, em que possa ser relevante avaliar um escopo externo como uma API.
 
-A estrutura de um teste normalmente se dá em um agrupamento definido por ```describe('name', () => { fn[] it() })```, e dentro de cada ```it() ou test()``` é criado o verbete e a instância de teste, e definida a expectativa booleana do teste, conforme demonstrado abaixo:
+A estrutura de um teste normalmente se dá em um agrupamento definido por `describe('name', () => { fn[] it() })`, e dentro de cada `it() ou test()` é criado o verbete e a instância de teste, e definida a expectativa booleana do teste, conforme demonstrado abaixo:
 
 ```
 imports ...
@@ -265,3 +265,23 @@ describe('<Button /> See more posts', () => {
 ```
 
 Também é considerado fundamental a descrição do erro em inglês, para facilitar e padronizar projetos internacionais, e manter frases mais curtas e sem idioma com caracteres especiais como a acentuação do português.
+
+Para testes assíncronos, e que envolvem chamadas externas, ainda que de um único componente, é preciso fazer uma camuflagem/`mock` na comunicação, para simplificar o que será testado e otimizar o tempo de desenvolvimento, uma dessas estratégias envolve reter as requisições HTTP como se fosse um loop de DNS, em que ao invés de chamar a interface externa, uma resposta mais enxuta e rápida, mas com a mesma estrutura satisfaz o problema.
+
+Como a filosofia de testes unitário é testar a menor parte, uma chamada externa deve ser refutada por: eventos externos como a rede estar com problema, o sistema externo estar com problemas, o limite de requisições já ter sido usado são justificativas de erros ardilosos que podem indicar um mal funcionamento no componente interno, por um problema externo.
+
+Outro problema é a concatenação de requisições, em um projeto grande testar várias páginas com múltiplas requisições podem levar a uma waterfall de segundos em cada tela ociosos do sistema e do desenvolvedor apenas aguardando uma resposta, que de forma otimista só irá demorar mais.
+
+Para a utilização de camufladores é preciso replicar a estrutura do dado a ser testado de forma enxuta, fazendo uso de dados fictícios e identificáveis mais simples, menor tamanho de dados para teste e também o uso dos métodos:
+
+```
+beforeAll(()=>{ initMock(); })
+afterEach(()=>{ resetMock(); })
+afterAll(()=>{ closeMock(); })
+```
+
+Sendo esses, respectivamente:
+
+- iniciar o serviço/`worker` antes para garantir que a camuflagem esteja em nível de execução no início dos testes
+- resetar os dados para garantir que nenhum teste de `POST` tenha alterado os dados ENTRE TESTES e tenha consistência da arquitetura `REST` em continuar `stateless`
+- finalizar o serviço de mock para evitar problemas com a utilização real de outro serviço.
