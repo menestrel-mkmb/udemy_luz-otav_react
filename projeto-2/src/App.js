@@ -1,5 +1,5 @@
 import P from 'prop-types';
-import React, { Component, useCallback, useEffect, useState } from 'react';
+import React, { Component, useCallback, useEffect, useMemo, useState } from 'react';
 
 import logo from './logo.svg';
 import './App.css';
@@ -18,12 +18,24 @@ const CallbackApp = () => {
 
   const incrementCounter = useCallback((num) => setCounter((c) => c + num), []);
 
+  const ButtonMemo = ({ incrementButton }) => {
+    console.log('child render');
+    return <button onClick={() => incrementButton(10)}>+memo</button>;
+  };
+
+  ButtonMemo.propTypes = {
+    incrementButton: P.func.isRequired,
+  };
+
   console.log('parent render');
 
   return (
     <div className="App">
       <h2>Counter {counter}</h2>
       <Button incrementButton={incrementCounter} />
+      {useMemo(() => {
+        return <ButtonMemo incrementButton={incrementCounter} />;
+      }, [incrementCounter])}
     </div>
   );
 };
