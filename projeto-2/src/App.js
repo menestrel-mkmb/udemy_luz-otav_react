@@ -17,6 +17,18 @@ const LifeCycleApp = () => {
     disableUseEffectConsoleLog && console.log('componentDidMount');
   }, []);
 
+  useEffect(() => {
+    disableUseEffectConsoleLog && console.log('parent componentDidUpdate');
+  });
+
+  useEffect(() => {
+    disableUseEffectConsoleLog && console.log('child counter1 componentDidUpdate');
+  }, [counter1]);
+
+  useEffect(() => {
+    disableUseEffectConsoleLog && console.log('child counter2 componentDidUpdate');
+  }, [counter2]);
+
   return (
     <div className="App">
       <h2 id="doubleCounter">
