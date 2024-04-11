@@ -1,11 +1,70 @@
 import P from 'prop-types';
-import React, { Component, useCallback, useEffect, useMemo, useState } from 'react';
+import React, { Component, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import logo from './logo.svg';
 import './App.css';
 
+const enableConsoleUseRefForm = false;
+
+const PostForm = ({ post, onClick }) => {
+  enableConsoleUseRefForm && console.log('child render');
+
+  return (
+    <section key={post.id}>
+      <h3 onClick={(e) => onClick(e.target.textContent)}>{post.title}</h3>
+      <p>{post.body}</p>
+    </section>
+  );
+};
+
+PostForm.propTypes = {
+  post: P.shape({
+    id: P.number.isRequired,
+    title: P.string.isRequired,
+    body: P.string.isRequired,
+  }).isRequired,
+  onClick: P.func.isRequired,
+};
+
+const RefFormApp = () => {
+  const [posts, setPosts] = useState([]);
+  const searchValue = useRef(null);
+
+  enableConsoleUseRefForm && console.log('parent render');
+
+  const handleClick = (value) => {
+    searchValue.current.value = value;
+    searchValue.current.focus();
+  };
+
+  useEffect(() => {
+    enableConsoleUseRefForm && console.log('componentDidMount render');
+    fetch('https://jsonplaceholder.typicode.com/posts')
+      .then((response) => response.json())
+      .then((data) => setPosts(data));
+  }, []);
+
+  return (
+    <div className="App">
+      <h2>Posts</h2>
+      <input type="search" placeholder="Search for post" ref={searchValue} />
+      <article>
+        {useMemo(() => {
+          return posts.length > 0 ? (
+            posts.map((post) => <PostForm key={post.id} post={post} onClick={handleClick} />)
+          ) : (
+            <p>Carregando...</p>
+          );
+        }, [posts])}
+      </article>
+    </div>
+  );
+};
+
+const enableConsoleUseRef = false;
+
 const Post = ({ post }) => {
-  console.log('child render');
+  enableConsoleUseRef && console.log('child render');
 
   return (
     <section key={post.id}>
@@ -27,10 +86,10 @@ const MemoFetchApp = () => {
   const [posts, setPosts] = useState([]);
   const [searchValue, setSearchValue] = useState('');
 
-  console.log('parent render');
+  enableConsoleUseRef && console.log('parent render');
 
   useEffect(() => {
-    console.log('componentDidMount render');
+    enableConsoleUseRef && console.log('componentDidMount render');
     setTimeout(() => {
       fetch('https://jsonplaceholder.typicode.com/posts')
         .then((response) => response.json())
@@ -39,7 +98,7 @@ const MemoFetchApp = () => {
   }, []);
 
   return (
-    <div className="App">
+    <div className="App" style={{ display: 'none' }}>
       <h2>Posts</h2>
       <input
         type="search"
@@ -222,6 +281,7 @@ function App() {
       <LifeCycleApp />
       <CallbackApp />
       <MemoFetchApp />
+      <RefFormApp />
     </div>
   );
 }
