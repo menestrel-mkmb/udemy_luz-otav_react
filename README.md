@@ -347,3 +347,15 @@ Entretanto, uma vez com esse contexto, ao iniciar o desenvolvimento de aplicativ
 ```
 
 Para valores e componentes mais complexos, como o caso de exemplos anteriores com o `allPosts`, `filteredPosts` e `posts`, há o uso do hook useReducer, que será visto posteriormente nesse documento.
+
+### 5.2 - useEffect
+
+Sobre os casos de ciclo de vida de componentes, com a centralização de gerenciamento de estados indo para os hooks, as funções anteriores de `componentDidUpdate`, `componentDidMount` e outras funções de efeitos colaterais tiveram sua implementação em sintaxes específicas do Hook denominado `useEffect`. Como adição dessa sintaxe, torna-se explícito lidar com as dependências de atualizações de forma correta, e com isso utilizar estados de valores de forma inteligente, e quando necessário se fazer uso do recurso de parâmetro do valor anterior, visto ao final da última seção, bem como encapsular algumas mudanças específicas de componentes dentro de outros hooks como `useCallback` e `useMemo`.
+
+Para alcançar o efeito desejado de `componentDidMount` com `useEffect` é utilizado o escopo:
+
+```
+useEffect(() => {
+    console.log("componentDidMount");
+}, []);
+```
