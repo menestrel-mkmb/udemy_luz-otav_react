@@ -6,24 +6,37 @@ import './App.css';
 
 const MemoFetchApp = () => {
   const [posts, setPosts] = useState([]);
+  const [searchValue, setSearchValue] = useState('');
 
   useEffect(() => {
     console.log('componentDidMount render');
-    fetch('https://jsonplaceholder.typicode.com/posts')
-      .then((response) => response.json())
-      .then((data) => setPosts(data));
+    setTimeout(() => {
+      fetch('https://jsonplaceholder.typicode.com/posts')
+        .then((response) => response.json())
+        .then((data) => setPosts(data));
+    }, 5000);
   }, []);
 
   return (
     <div className="App">
       <h2>Posts</h2>
+      <input
+        type="search"
+        placeholder="Search for post"
+        value={searchValue}
+        onChange={(e) => setSearchValue(e.target.value)}
+      />
       <article>
-        {posts.map((post) => (
-          <section key={post.id}>
-            <h3>{post.title}</h3>
-            <p>{post.body}</p>
-          </section>
-        ))}
+        {posts.length > 0 ? (
+          posts.map((post) => (
+            <section key={post.id}>
+              <h3>{post.title}</h3>
+              <p>{post.body}</p>
+            </section>
+          ))
+        ) : (
+          <p>Carregando...</p>
+        )}
       </article>
     </div>
   );
