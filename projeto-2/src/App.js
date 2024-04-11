@@ -5,6 +5,8 @@ import logo from './logo.svg';
 import './App.css';
 
 const Post = ({ post }) => {
+  console.log('child render');
+
   return (
     <section key={post.id}>
       <h3>{post.title}</h3>
@@ -46,7 +48,9 @@ const MemoFetchApp = () => {
         onChange={(e) => setSearchValue(e.target.value)}
       />
       <article>
-        {posts.length > 0 ? posts.map((post) => <Post key={post.id} post={post} />) : <p>Carregando...</p>}
+        {useMemo(() => {
+          return posts.length > 0 ? posts.map((post) => <Post key={post.id} post={post} />) : <p>Carregando...</p>;
+        }, [posts])}
       </article>
     </div>
   );
