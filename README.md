@@ -295,3 +295,29 @@ Ao final do curso será avaliada a necessidade de revisão desse módulo, e foi 
 ## 5 - React Hooks
 
 Os hooks foram desenvolvidos com o objetivo de centralizar o controle de ciclo de vida de componentes e estados de componentes internos para padronizar a solução de questões como `bind.this`, `componentDidMount`, `componentWillUnmount` e alguns problemas com chamadas assíncronas, aquisição de dados de estados passados de forma não proposital e para iniciar o processo de seleção de renderização usando memória e referências, para modificar menos componentes e aumentar a performance da biblioteca em cenários de muitas interações.
+
+### 5.1 - useState
+
+Para garantir que um certo dado esteja em seu estado correto, e ela tenha um indicativo de `trigger` para atualização da renderização, o `useState` é utilizado.
+
+Assim, todo dado possui um valor padrão inicial, e um callback único para alteração de seu valor, sua semântica é definida por `const [value: any, setValue: fn?] = useState(initialValue: any);` em que há uma desconstrução de um array delimitando o valor e seu `callback` opcional de alteração.
+
+Portanto, alterar o estado se torna pontual, e não se faz mais necessário espalhar o restante do estado e lidar com um objeto único grande sem uma conexão direta e definida entre dois valores do componente.
+
+```
+  App...
+  const [counter, setCounter] = useState(0);
+
+  const handleClickCounter = () => {
+    setCounter(counter + 1);
+  };
+
+  return(
+    ...
+    <h2>Contador: {counter}</h2>
+    <button type="button" onClick={handleClickCounter}>
+    +
+    </button>
+    ...
+  );
+```
