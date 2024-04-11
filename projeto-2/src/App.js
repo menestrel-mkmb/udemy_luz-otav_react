@@ -1,7 +1,32 @@
-import { Component, useEffect, useState } from 'react';
+import P from 'prop-types';
+import React, { Component, useCallback, useEffect, useState } from 'react';
 
 import logo from './logo.svg';
 import './App.css';
+
+const Button = React.memo(function Button({ incrementButton }) {
+  console.log('child render');
+  return <button onClick={() => incrementButton(10)}>+</button>;
+});
+
+Button.propTypes = {
+  incrementButton: P.func.isRequired,
+};
+
+const CallbackApp = () => {
+  const [counter, setCounter] = useState(0);
+
+  const incrementCounter = useCallback((num) => setCounter((c) => c + num), []);
+
+  console.log('parent render');
+
+  return (
+    <div className="App">
+      <h2>Counter {counter}</h2>
+      <Button incrementButton={incrementCounter} />
+    </div>
+  );
+};
 
 const listenerEvent = () => {
   console.log('listenerEvent');
@@ -38,7 +63,7 @@ const LifeCycleApp = () => {
   }, []);
 
   return (
-    <div className="App">
+    <div className="App" style={{ display: 'none' }}>
       <h2 id="doubleCounter">
         C1: {counter1} C2: {counter2}
       </h2>
@@ -129,6 +154,7 @@ function App() {
       <FunctionApp />
       <FunctionStateApp />
       <LifeCycleApp />
+      <CallbackApp />
     </div>
   );
 }
