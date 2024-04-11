@@ -3,31 +3,39 @@ import { Component, useEffect, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-// const listenerEvent = () => {
-//   console.log('listenerEvent');
-// };
+const listenerEvent = () => {
+  console.log('listenerEvent');
+};
 
-const disableUseEffectConsoleLog = true;
+const enableUseEffectConsoleLog = true;
 
 const LifeCycleApp = () => {
   const [counter1, setCounter1] = useState(0);
   const [counter2, setCounter2] = useState(0);
 
   useEffect(() => {
-    disableUseEffectConsoleLog && console.log('componentDidMount');
+    enableUseEffectConsoleLog && console.log('componentDidMount');
   }, []);
 
   useEffect(() => {
-    disableUseEffectConsoleLog && console.log('parent componentDidUpdate');
+    enableUseEffectConsoleLog && console.log('parent componentDidUpdate');
   });
 
   useEffect(() => {
-    disableUseEffectConsoleLog && console.log('child counter1 componentDidUpdate');
+    enableUseEffectConsoleLog && console.log('child counter1 componentDidUpdate');
   }, [counter1]);
 
   useEffect(() => {
-    disableUseEffectConsoleLog && console.log('child counter2 componentDidUpdate');
+    enableUseEffectConsoleLog && console.log('child counter2 componentDidUpdate');
   }, [counter2]);
+
+  useEffect(() => {
+    document.querySelector('#doubleCounter')?.addEventListener('click', listenerEvent);
+    return () => {
+      enableUseEffectConsoleLog && console.log('componentWillUnmount');
+      document.querySelector('#doubleCounter')?.removeEventListener('click', listenerEvent);
+    };
+  }, []);
 
   return (
     <div className="App">
