@@ -461,3 +461,29 @@ const ButtonMemo = ({ incrementButton }) => {
 ```
 
 Foi utilizado um componente ButtonMemo idêntico ao componente Button anterior, com a adição de Memo no nome apenas para testar simultaneamente as 2 propostas.
+
+### 5.5 - useRef
+
+Seja como componente ou função, existem algumas coisas que requerem bastante iterações com o usuário, formulários e inputs são exemplos claros disso. Para que seja possível gerenciar o estado de forma segura, é necessário utilizar hooks, entretanto o hook de `useState` pode não ser adequado quando não se faz necessário múltiplas renderizações do componente apenas por um valor, e o `useMemo` não é adequado pois a atualização de memória seria chamada a cada verificação, o que perde o propósito de salvar para usar apenas quando necessário, para esse tipo de situação existe o `useRef`.
+
+Um hook de valor mutável que armazena o valor atualizado sem causar renderizações recursivas, ele é útil para persistir esses valores, e por isso também é usado para criar referências a elementos no DOM e comparar valores entre estados, já que por sua persistência, há uma comparação e apontamento coeso. Sua sintaxe e utilização são demonstradas abaixo:
+
+```
+const RefForm = () => {
+  ...
+  const searchValue = useRef(null);
+
+  const handleClick = (value) => {
+    searchValue.current.value = value;
+    searchValue.current.focus();
+  };
+  ...
+  return(
+    ...
+    <input type="search" placeholder="Search for post" ref={searchValue} />
+    ...
+  )
+}
+```
+
+Declara-se a referência a ser rastreada, inicialmente como null, os eventos sintéticos do React tem a capacidade de utilizar o objeto como valor e atualizar a partir de eventos do usuário. Ao interagir com a referência é preciso utilizar o parâmetro `.current` para acessar os métodos do elemento do DOM e manipular da forma necessária.
