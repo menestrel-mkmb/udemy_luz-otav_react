@@ -4,9 +4,28 @@ import React, { Component, useCallback, useEffect, useMemo, useState } from 'rea
 import logo from './logo.svg';
 import './App.css';
 
+const Post = ({ post }) => {
+  return (
+    <section key={post.id}>
+      <h3>{post.title}</h3>
+      <p>{post.body}</p>
+    </section>
+  );
+};
+
+Post.propTypes = {
+  post: P.shape({
+    id: P.number.isRequired,
+    title: P.string.isRequired,
+    body: P.string.isRequired,
+  }).isRequired,
+};
+
 const MemoFetchApp = () => {
   const [posts, setPosts] = useState([]);
   const [searchValue, setSearchValue] = useState('');
+
+  console.log('parent render');
 
   useEffect(() => {
     console.log('componentDidMount render');
@@ -27,16 +46,7 @@ const MemoFetchApp = () => {
         onChange={(e) => setSearchValue(e.target.value)}
       />
       <article>
-        {posts.length > 0 ? (
-          posts.map((post) => (
-            <section key={post.id}>
-              <h3>{post.title}</h3>
-              <p>{post.body}</p>
-            </section>
-          ))
-        ) : (
-          <p>Carregando...</p>
-        )}
+        {posts.length > 0 ? posts.map((post) => <Post key={post.id} post={post} />) : <p>Carregando...</p>}
       </article>
     </div>
   );
