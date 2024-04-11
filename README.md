@@ -321,3 +321,27 @@ Portanto, alterar o estado se torna pontual, e não se faz mais necessário espa
     ...
   );
 ```
+
+Conforme demonstrado acima, utilizando eventos sintéticos em conjunto com hook para controle de estado é mantido a coesão de um código menos verboso, passando pelo rigor de verificação de ciclo de vida e transição de estados do React.
+
+Entretanto, uma vez com esse contexto, ao iniciar o desenvolvimento de aplicativos com hooks que tentam simular o ciclo de vida é comum obter casos em que o estado alcançado por uma função ou expressão é anterior ou de uma promessa em andamento e ter uma discrepância entre a legibilidade de código e a intenção de execução, nesse caso há uma alternativa simples para gerenciamento de valores crus, passando como parâmetro do valor da função de callback uma função anônima e pegando o parâmetro que é o valor atual e previsível, como demonstrado abaixo:
+
+```
+  App...
+  const [counter, setCounter] = useState(0);
+
+  const handleSafeClickCounter = () => {
+    setCounter((c) => c + 1);
+  };
+
+  return(
+    ...
+    <h2>Contador: {counter}</h2>
+    <button type="button" onClick={handleSafeClickCounter}>
+    +s
+    </button>
+    ...
+  );
+```
+
+Para valores e componentes mais complexos, como o caso de exemplos anteriores com o `allPosts`, `filteredPosts` e `posts`, há o uso do hook useReducer, que será visto posteriormente nesse documento.
