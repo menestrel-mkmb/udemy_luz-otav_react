@@ -379,3 +379,21 @@ useEffect(() => {
     };
   }, []);
 ```
+
+Da possibilidade do React ser utilizado enquanto Bundle e de forma parcial na internet percebe-se um modo factível de entender a necessidade desse escopo, considerando um agente externo que cria algo como um `setTimeout` ou um `eventListener` deve ser explicitado o uso do `componentWillUnmount` para evitar chamadas de instâncias desconstruídas pelo VirtualDOM, e dentro do ciclo de vida, mudar as referências para `null`, semelhante a seção 1.5 desse documento. Vide exemplo abaixo:
+
+```
+const listenerEvent = () => {
+  console.log('listenerEvent');
+};
+
+useEffect(() => {
+    document.querySelector('#doubleCounter')?.addEventListener('click', listenerEvent);
+    return () => {
+      console.log('componentWillUnmount');
+      document.querySelector('#doubleCounter')?.removeEventListener('click', listenerEvent);
+    };
+  }, []);
+```
+
+O efeito problemático desses resíduos acontece com a navegação ou desconstrução de componentes durante o uso do aplicativo, para simular tal atualização sem recarregar a página, um elemento `<p>1</p>` foi criado e alterado para `<p>12</p>` e `<p>123</p>`, assim sem o uso da estrutura de `componentWillUnmount` o comportamento de `console.log('componentWillUnmount');` é concatenado, e demonstra o acúmulo de resíduo incompatíveis com o intuito da estrutura de componentes e a filosofia do SPA.
