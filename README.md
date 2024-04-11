@@ -440,3 +440,24 @@ const Button = React.memo(function Button({ incrementButton }) {
 ```
 
 Assim, apesar de dentro do componente ter o `console.log('child render');`, o resultado obtido no Console com atualizações é apenas a renderização do componente pai obtida com `console.log('parent render');`.
+
+### 5.4 - useMemo
+
+Ao invés de verificar os componentes que não estão na dependência de atualização de estado, a mesma tática do `useCallback` serve para o `useMemo` com elementos `.jsx`. A sintaxe do hook e sua utilização podem ser visualizada em:
+
+```
+{useMemo(() => {
+        return <ButtonMemo incrementButton={incrementCounter} />;
+      }, [incrementCounter])}
+```
+
+E o componente utilizado na chamada é demonstrado abaixo:
+
+```
+const ButtonMemo = ({ incrementButton }) => {
+    console.log('child render');
+    return <button onClick={() => incrementButton(10)}>+memo</button>;
+  };
+```
+
+Foi utilizado um componente ButtonMemo idêntico ao componente Button anterior, com a adição de Memo no nome apenas para testar simultaneamente as 2 propostas.
