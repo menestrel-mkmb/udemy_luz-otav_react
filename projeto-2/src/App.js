@@ -7,7 +7,7 @@ const listenerEvent = () => {
   console.log('listenerEvent');
 };
 
-const enableUseEffectConsoleLog = true;
+const enableUseEffectConsoleLog = false;
 
 const LifeCycleApp = () => {
   const [counter1, setCounter1] = useState(0);
@@ -48,6 +48,7 @@ const LifeCycleApp = () => {
       <button type="button" onClick={() => setCounter2((c) => c + 1)}>
         + C2
       </button>
+      <p>123</p>
     </div>
   );
 };
