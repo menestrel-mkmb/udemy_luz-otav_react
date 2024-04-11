@@ -296,6 +296,8 @@ Ao final do curso será avaliada a necessidade de revisão desse módulo, e foi 
 
 Os hooks foram desenvolvidos com o objetivo de centralizar o controle de ciclo de vida de componentes e estados de componentes internos para padronizar a solução de questões como `bind.this`, `componentDidMount`, `componentWillUnmount` e alguns problemas com chamadas assíncronas, aquisição de dados de estados passados de forma não proposital e para iniciar o processo de seleção de renderização usando memória e referências, para modificar menos componentes e aumentar a performance da biblioteca em cenários de muitas interações.
 
+Uma normativa obrigatória de nomenclatura é o termo `use` no início de todos os tipos de hooks, já normativa em seu uso é de que, para garantir sua execução, os mesmos devem ser filhos direto da função de componente, ou seja, não deve-se utilizar quaisquer verificação com um hook encapsulado como em `if(true){useEffect(fn, []?);}`.
+
 ### 5.1 - useState
 
 Para garantir que um certo dado esteja em seu estado correto, e ela tenha um indicativo de `trigger` para atualização da renderização, o `useState` é utilizado.
