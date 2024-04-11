@@ -411,3 +411,32 @@ useEffect(() => {
 ```
 
 O efeito problemático desses resíduos acontece com a navegação ou desconstrução de componentes durante o uso do aplicativo, para simular tal atualização sem recarregar a página, um elemento `<p>1</p>` foi criado e alterado para `<p>12</p>` e `<p>123</p>`, assim sem o uso da estrutura de `componentWillUnmount` o comportamento de `console.log('componentWillUnmount');` é concatenado, e demonstra o acúmulo de resíduo incompatíveis com o intuito da estrutura de componentes e a filosofia do SPA.
+
+### 5.3 - useCallback
+
+De forma similar a instâncias de elementos no `jsx`, quando é preciso atualizar a renderização de estado de um componente que contém hooks, as funções contidas nos eventos sintéticos e hooks também são reavaliadas, sendo assim, também é importante denotar o escopo de dependências para evitar avaliações de renderizações, para isso usa-se o `useCallback`.
+
+```
+const CallbackApp = () => {
+  ...
+  const incrementCounter = useCallback((num) => setCounter((c) => c + num), []);
+  console.log('parent render');
+  ...
+  return(
+    ...
+    <Button incrementButton={incrementCounter} />
+    ...
+  );
+}
+```
+
+De forma diferente das anteriores nesse documento, o botão utilizado nesse evento sintético também é um componente externo, e não está disposto de forma estática dentro do retorno da função pai. Com isso, com uma dependência sendo chamada, por mais que o contexto não torne necessário uma reverificação do componente externo, o React faz a verificação por não conter indícios explícitos de que é uma dependência de endereço apenas, sendo assim, é necessário um indicativo de memória, evitar tal processamento, de início foi utilizado o `React.memo()`, como demonstrado abaixo, entretanto posteriormente será utilizado o hook do `useMemo()`.
+
+```
+const Button = React.memo(function Button({ incrementButton }) {
+  console.log('child render');
+  return <button onClick={() => incrementButton(10)}>+</button>;
+});
+```
+
+Assim, apesar de dentro do componente ter o `console.log('child render');`, o resultado obtido no Console com atualizações é apenas a renderização do componente pai obtida com `console.log('parent render');`.
