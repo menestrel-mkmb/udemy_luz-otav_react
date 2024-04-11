@@ -291,3 +291,7 @@ Sendo esses, respectivamente:
 Durante a execução do curso, as versões atuais dos pacotes não são mais compatíveis de verificação por problema na transpilação de módulo TS pelo babel. Após tentar burlar essas verificações, iniciar um projeto em Vite moderno para tentar contornar e procurar soluções na documentação e na internet, o timeboxing foi atingido, e para o objetivo linear da aprendizagem.
 
 Ao final do curso será avaliada a necessidade de revisão desse módulo, e foi adiada unicamente por já ter explicitado o uso futuro no curso de tal recurso em projetos modernos, caso seja necessário, uma versão legada do projeto será criada nas exatas versões do atual módulo, para a amostragem de código.
+
+## 5 - React Hooks
+
+Os hooks foram desenvolvidos com o objetivo de centralizar o controle de ciclo de vida de componentes e estados de componentes internos para padronizar a solução de questões como `bind.this`, `componentDidMount`, `componentWillUnmount` e alguns problemas com chamadas assíncronas, aquisição de dados de estados passados de forma não proposital e para iniciar o processo de seleção de renderização usando memória e referências, para modificar menos componentes e aumentar a performance da biblioteca em cenários de muitas interações.
