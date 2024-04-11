@@ -1,23 +1,41 @@
+import { Component } from 'react';
+
 import logo from './logo.svg';
 import './App.css';
+
+class ClassApp extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      reverse: false,
+    };
+
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    const { reverse } = this.state;
+    this.setState({ reverse: !reverse });
+  }
+
+  render() {
+    const { reverse } = this.state;
+    return (
+      <>
+        <img src={logo} className={reverse ? 'App-logo reverse' : 'App-logo'} alt="logo" />
+        <button type="button" onClick={this.handleClick}>
+          Inverter giro
+        </button>
+      </>
+    );
+  }
+}
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <ClassApp />
+      <h1>Olá</h1>
     </div>
   );
 }
