@@ -1,7 +1,36 @@
-import { Component, useState } from 'react';
+import { Component, useEffect, useState } from 'react';
 
 import logo from './logo.svg';
 import './App.css';
+
+// const listenerEvent = () => {
+//   console.log('listenerEvent');
+// };
+
+const disableUseEffectConsoleLog = true;
+
+const LifeCycleApp = () => {
+  const [counter1, setCounter1] = useState(0);
+  const [counter2, setCounter2] = useState(0);
+
+  useEffect(() => {
+    disableUseEffectConsoleLog && console.log('componentDidMount');
+  }, []);
+
+  return (
+    <div className="App">
+      <h2 id="doubleCounter">
+        C1: {counter1} C2: {counter2}
+      </h2>
+      <button type="button" onClick={() => setCounter1((c) => c + 1)}>
+        + C1
+      </button>
+      <button type="button" onClick={() => setCounter2((c) => c + 1)}>
+        + C2
+      </button>
+    </div>
+  );
+};
 
 const FunctionStateApp = () => {
   const [counter, setCounter] = useState(0);
@@ -15,7 +44,7 @@ const FunctionStateApp = () => {
   };
 
   return (
-    <div className="App">
+    <div className="App" style={{ display: 'none' }}>
       <h2>Contador: {counter}</h2>
       <button type="button" onClick={handleClickCounter}>
         +
@@ -78,6 +107,7 @@ function App() {
       <ClassApp />
       <FunctionApp />
       <FunctionStateApp />
+      <LifeCycleApp />
     </div>
   );
 }
