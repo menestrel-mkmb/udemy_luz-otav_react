@@ -4,8 +4,35 @@ import React, { Component, useCallback, useEffect, useMemo, useState } from 'rea
 import logo from './logo.svg';
 import './App.css';
 
+const MemoFetchApp = () => {
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    console.log('componentDidMount render');
+    fetch('https://jsonplaceholder.typicode.com/posts')
+      .then((response) => response.json())
+      .then((data) => setPosts(data));
+  }, []);
+
+  return (
+    <div className="App">
+      <h2>Posts</h2>
+      <article>
+        {posts.map((post) => (
+          <section key={post.id}>
+            <h3>{post.title}</h3>
+            <p>{post.body}</p>
+          </section>
+        ))}
+      </article>
+    </div>
+  );
+};
+
+const enableCallbackAppConsole = false;
+
 const Button = React.memo(function Button({ incrementButton }) {
-  console.log('child render');
+  enableCallbackAppConsole && console.log('child render');
   return <button onClick={() => incrementButton(10)}>+</button>;
 });
 
@@ -19,7 +46,7 @@ const CallbackApp = () => {
   const incrementCounter = useCallback((num) => setCounter((c) => c + num), []);
 
   const ButtonMemo = ({ incrementButton }) => {
-    console.log('child render');
+    enableCallbackAppConsole && console.log('child render');
     return <button onClick={() => incrementButton(10)}>+memo</button>;
   };
 
@@ -27,10 +54,10 @@ const CallbackApp = () => {
     incrementButton: P.func.isRequired,
   };
 
-  console.log('parent render');
+  enableCallbackAppConsole && console.log('parent render');
 
   return (
-    <div className="App">
+    <div className="App" style={{ display: 'none' }}>
       <h2>Counter {counter}</h2>
       <Button incrementButton={incrementCounter} />
       {useMemo(() => {
@@ -167,6 +194,7 @@ function App() {
       <FunctionStateApp />
       <LifeCycleApp />
       <CallbackApp />
+      <MemoFetchApp />
     </div>
   );
 }
