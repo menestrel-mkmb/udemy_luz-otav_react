@@ -369,3 +369,13 @@ useEffect(() => {
 ```
 
 Para citar, como a montagem de componente resulta em uma atualização, pode-se utilizar o 2º bloco com a mesma função do 1º, conforme a [documentação do React](https://legacy.reactjs.org/docs/hooks-effect.html).
+
+Para alcançar o efeito desejado de `componentWillUnmount` com `useEffect` é utilizado o escopo:
+
+```
+useEffect(() => {
+    return () => {
+        console.log('componentWillUnmount');
+    };
+  }, []);
+```
