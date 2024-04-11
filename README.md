@@ -364,11 +364,25 @@ Para alcançar o efeito desejado de `componentDidUpdate` com `useEffect` é util
 
 ```
 useEffect(() => {
-    console.log("componentDidUpdate");
+    console.log("parent and 100 children componentDidUpdate");
 });
 ```
 
 Para citar, como a montagem de componente resulta em uma atualização, pode-se utilizar o 2º bloco com a mesma função do 1º, conforme a [documentação do React](https://legacy.reactjs.org/docs/hooks-effect.html).
+
+Para renderizações parciais, o principal motivo para o escopo SPA da web moderna, é necessário indicar as dependências na função, com isso têm-se o escopo abaixo:
+
+```
+useEffect(() => {
+    enableUseEffectConsoleLog && console.log('child counter1 componentDidUpdate');
+  }, [counter1]);
+
+  useEffect(() => {
+    enableUseEffectConsoleLog && console.log('child counter2 componentDidUpdate');
+  }, [counter2]);
+```
+
+Assim, diferente do uso do hook sem dependências, no console de exemplo, simula-se que ao invés de 101 atualizações (1 pai e 100 componentes filhos), apenas 2 componentes são editados (1 pai e 1 filho), pois só existe 1 filho como vetor de dependência.
 
 Para alcançar o efeito desejado de `componentWillUnmount` com `useEffect` é utilizado o escopo:
 
