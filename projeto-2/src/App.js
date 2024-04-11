@@ -10,11 +10,18 @@ const FunctionStateApp = () => {
     setCounter(counter + 1);
   };
 
+  const handleSafeClickCounter = () => {
+    setCounter((c) => c + 1);
+  };
+
   return (
     <div className="App">
       <h2>Contador: {counter}</h2>
       <button type="button" onClick={handleClickCounter}>
         +
+      </button>
+      <button type="button" onClick={handleSafeClickCounter}>
+        +s
       </button>
     </div>
   );
