@@ -1,4 +1,4 @@
-import { createContext, useContext } from 'react';
+import { createContext, useContext, useState } from 'react';
 
 const GlobalContext = createContext();
 const globalState = {
@@ -8,17 +8,25 @@ const globalState = {
 };
 
 const H1 = () => {
-  const { globalState } = useContext(GlobalContext);
-  return <h1 className="h1">{globalState.title}</h1>;
+  const {
+    contextState: {
+      globalState: { title },
+    },
+  } = useContext(GlobalContext);
+  return <h1 className="h1">{title}</h1>;
 };
 
 const Div = () => {
-  const { globalState } = useContext(GlobalContext);
+  const {
+    contextState: {
+      globalState: { body },
+    },
+  } = useContext(GlobalContext);
 
   return (
     <div className="div">
       <H1 />
-      <p className="p">{globalState.body}</p>
+      <p className="p">{body}</p>
     </div>
   );
 };
@@ -28,9 +36,10 @@ const ContextApp = () => {
 };
 
 const Context = () => {
+  const [contextState, setContextState] = useState({ globalState });
   return (
     <div className="App">
-      <GlobalContext.Provider value={{ globalState }}>
+      <GlobalContext.Provider value={{ contextState, setContextState }}>
         <ContextApp />
       </GlobalContext.Provider>
     </div>
