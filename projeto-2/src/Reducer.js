@@ -1,6 +1,8 @@
 import { useContext, useEffect, useReducer, useRef, useState } from 'react';
 import { GlobalContext } from './Context';
 
+const enableConsoleCustomHook = false;
+
 const useMyHook = (cb, delay = 1000) => {
   const saveCb = useRef();
 
@@ -35,6 +37,8 @@ const CustomHookApp = () => {
   );
 };
 
+const enableConsoleReducer = false;
+
 const reducer = (state, action) => {
   switch (action.type) {
     case 'increment':
@@ -42,7 +46,7 @@ const reducer = (state, action) => {
     case 'decrement':
       return { ...state, counter: state.counter > 0 ? state.counter - 1 : 0 };
     case 'insertDate': {
-      console.log(action.payload);
+      enableConsoleReducer && console.log(action.payload);
       return { ...state, title: action.payload };
     }
     case 'changeTitle': {
@@ -51,7 +55,7 @@ const reducer = (state, action) => {
     case 'invertBody':
       return { ...state, body: state.body.split('').reverse().join('') };
   }
-  console.log('Nenhuma das ações anteriores foi executada');
+  enableConsoleCustomHook && console.log('Nenhuma das ações anteriores foi executada');
   return { ...state };
 };
 
@@ -62,7 +66,7 @@ const ReducerApp = () => {
 
   const handleChangeTitle = () => {
     if (!titleRef.current.value) return;
-    console.log('change title');
+    enableConsoleReducer && console.log('change title');
     dispatch({ type: 'changeTitle', payload: titleRef.current.value });
   };
 
