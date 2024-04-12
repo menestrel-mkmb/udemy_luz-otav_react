@@ -98,7 +98,7 @@ const MemoFetchApp = () => {
   }, []);
 
   return (
-    <div className="App" style={{ display: 'none' }}>
+    <div className="App">
       <h2>Posts</h2>
       <input
         type="search"
@@ -143,7 +143,7 @@ const CallbackApp = () => {
   enableCallbackAppConsole && console.log('parent render');
 
   return (
-    <div className="App" style={{ display: 'none' }}>
+    <div className="App">
       <h2>Counter {counter}</h2>
       <Button incrementButton={incrementCounter} />
       {useMemo(() => {
@@ -188,7 +188,7 @@ const LifeCycleApp = () => {
   }, []);
 
   return (
-    <div className="App" style={{ display: 'none' }}>
+    <div className="App">
       <h2 id="doubleCounter">
         C1: {counter1} C2: {counter2}
       </h2>
@@ -215,7 +215,7 @@ const FunctionStateApp = () => {
   };
 
   return (
-    <div className="App" style={{ display: 'none' }}>
+    <div className="App">
       <h2>Contador: {counter}</h2>
       <button type="button" onClick={handleClickCounter}>
         +
@@ -235,7 +235,7 @@ const FunctionApp = () => {
   };
 
   return (
-    <div className="App" style={{ display: 'none' }}>
+    <div className="App">
       <img src={logo} className={reverse ? 'App-logo reverse' : 'App-logo'} alt="logo" />
       <button type="button" onClick={handleClick}>
         Inverter giro
@@ -262,7 +262,7 @@ class ClassApp extends Component {
   render() {
     const { reverse } = this.state;
     return (
-      <div className="App" style={{ display: 'none' }}>
+      <div className="App">
         <img src={logo} className={reverse ? 'App-logo reverse' : 'App-logo'} alt="logo" />
         <button type="button" onClick={this.handleClick}>
           Inverter giro
@@ -274,7 +274,7 @@ class ClassApp extends Component {
 
 function App() {
   return (
-    <div className="App">
+    <div className="App" style={{ display: 'none' }}>
       <ClassApp />
       <FunctionApp />
       <FunctionStateApp />
