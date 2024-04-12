@@ -11,7 +11,7 @@ const ContextApp = () => {
 const Context = () => {
   const [counter, setCounter] = useState(0);
   const [title, setTitle] = useState('Olá mundo');
-  const [body, setBody] = useState('Olá mundo');
+  const [body, setBody] = useState('Lorem123');
 
   return (
     <div className="App">

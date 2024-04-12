@@ -487,3 +487,45 @@ const RefForm = () => {
 ```
 
 Declara-se a referência a ser rastreada, inicialmente como null, os eventos sintéticos do React tem a capacidade de utilizar o objeto como valor e atualizar a partir de eventos do usuário. Ao interagir com a referência é preciso utilizar o parâmetro `.current` para acessar os métodos do elemento do DOM e manipular da forma necessária.
+
+### 5.6 - useContext
+
+Com o fluxo de dados indo obrigatoriamente de pai para filho em componentes, e o uso de componentes em diferentes regiões, até mesmo de templates em uma página React, disposto dos padrões de coesão, deve ser considerado mal uso em ter estados globais manuais, com propriedades passadas via `props` por toda a cadeia, essa aberração é chamada de `prop drilling`.
+
+Entretanto, esse mesmo cenário é uma afronta ao paradigma de compartimentarização de componentes, visto que não haveria sentido dividir tanto, e espalhar diversos elementos por todo o aplicativo, para satisfazer essa necessidade, sem afetar a manutenção do código, e a coesão, o hook de `useContext` é um dos padrões utilizado, citando o Redux como padrão externo, similar e mais robusto e complexo.
+
+A partir da estrutura de `Provider/Consumer`, é possível diferenciar o tipo de resposta para cada requisição, enquanto define o escopo do provedor do contexto. Assim, deve-se criar um contexto com os valores e métodos a serem compartilhados por componentes diversos, e caso necessário, criar métodos e valores privados ao contexto para maior controle, conforme definido pelo código:
+
+```
+  ...
+  export const GlobalContext = createContext();
+  ...
+  const [counter, setCounter] = useState(0);
+  const [title, setTitle] = useState('Olá mundo');
+  const [body, setBody] = useState('Lorem123');
+  ...
+  return (
+    ...
+    <GlobalContext.Provider value={{ counter, setCounter, title, setTitle, body, setBody }}>
+        <AccessToContextApp />
+    </GlobalContext.Provider>
+    ...
+    <IsolatedFromContextApp />
+  );
+```
+
+Com isso, ao desenvolver apenas no componente em que o contexto é necessário, desde que o Provedor esteja alimentando o mesmo, é necessário apenas simbolizar qual contexto irá utilizar e de que forma, como demonstrado abaixo:
+
+```
+const Body = () => {
+  const { body, setCounter } = useContext(GlobalContext);
+  ...
+  return (
+    ....
+    <p className="p" onClick={() => setCounter((c) => c + 1)}>
+      {body}
+    </p>
+    ...
+  );
+}
+```
