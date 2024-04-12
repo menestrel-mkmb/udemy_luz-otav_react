@@ -571,3 +571,45 @@ const reducer = (state, action) => {
 ```
 
 Assim, o acesso aos estados de componentes é garantido de forma similar ao contexto, no `JSX` utiliza-se o dispatch em eventos sintéticos, e nele é declarado a ação, e qualquer dado necessário em tempo de execução.
+
+### 5.8 - Custom Hooks
+
+O React também permite a criação de hooks customizados, e para isso, é necessário criar seu hook na normativa de nome, e utilizar o useEffect e os conceitos de ciclo de vida do componente para gerenciar os valores e métodos internos e efetuar uma implementação própria. Como exemplo, tem-se um hook de intervalo de atualização:
+
+```
+const useMyHook = (cb, delay = 1000) => {
+    const saveCb = useRef();
+
+    useEffect(() => {
+        saveCb.current = cb;
+    }, [cb]);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+          saveCb.current();
+        }, delay);
+
+        return () => {
+            clearInterval(interval);
+        }
+    }, [delay]);
+}
+```
+
+E sua utilização é demonstrada abaixo:
+
+```
+const App = () => {
+  const [counter, setCounter] = useState(0);
+  const [delay] = useState(1000);
+  ...
+
+  return(
+    ...
+    <h2 onClick={useMyHook(() => setCounter((c) => c + 1), delay)}>Contador: {counter}</h2>
+    ...
+  )
+}
+```
+
+Com esse exemplo, é demonstrado que é possível criar um hook; para conhecimento, esse contexto faz parte de uma arquitetura React, em que se separa um componente de seus hooks. Diante desse código é apresentado que a responsabilidade de criar um hook não abstem da necessidade de manter os padrões vistos anteriormente, como: usar referências de valores do estado anterior dentro do `setCounter`, usar uma referência para evitar dependências cíclicas e limpar um intervalo de execução de uma ação no `lifecycle cWillUnmount` equivalente do `useEffect`.
