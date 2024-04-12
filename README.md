@@ -613,3 +613,60 @@ const App = () => {
 ```
 
 Com esse exemplo, é demonstrado que é possível criar um hook; para conhecimento, esse contexto faz parte de uma arquitetura React, em que se separa um componente de seus hooks. Diante desse código é apresentado que a responsabilidade de criar um hook não abstem da necessidade de manter os padrões vistos anteriormente, como: usar referências de valores do estado anterior dentro do `setCounter`, usar uma referência para evitar dependências cíclicas e limpar um intervalo de execução de uma ação no `lifecycle cWillUnmount` equivalente do `useEffect`.
+
+No caso de requisição de API externa, com o contexto de navegação, o ideal é utilizar o Reducer para criar um contexto de dispatch de início da requisição, que irá se encerrar quando um dos seguintes acontecer: Promise do fetch retornar ou o equivalente de `componentWillUnmount` ser chamado, e o exemplo prático disso pode ser visualizado abaixo:
+
+```
+const App = () => {
+  const postsContext = useContext(PostsContext);
+  const { postsState, postsDispatch } = postsContext;
+  ...
+  useEffect(() => {
+      loadPosts(postsDispatch).then((dispatch) => {
+        if (isMounted.current) {
+          dispatch();
+        }
+      });
+
+      return () => {
+        isMounted.current = false;
+      };
+    }, [postsDispatch]);
+  ...
+  return(
+    ...
+    <h1>POSTS</h1>
+    {postsState.loading && (
+      <p>
+        <strong>Carregando posts...</strong>
+      </p>
+    )}
+
+    {postsState.posts.map((p) => (
+      <p key={p.id}>{p.title}</p>
+    ))}
+    ...
+  )
+}
+```
+
+Utilizando o encadeamento de chamada da função `loadPosts().then()` é passado a referência da função, assim, ao invés de executá-la no retorno da promessa, é possível fazer a verificação de `isMounted`, condizente com a boa prática de não deixar resíduos. O Reducer contendo as ações de gatilho de chamada, e população do estado podem ser vistas abaixo:
+
+```
+export const reducer = (state, action) => {
+  switch (action) {
+    case 'POSTS_SUCCESS': {
+      console.log(action.type);
+      return { ...state, posts: action.payload, loading: false };
+    }
+    case 'POSTS_LOADING': {
+      console.log(action.type);
+      return { ...state, loading: true };
+    }
+  }
+
+  console.log('Não encontrei a action', action.type);
+  return { ...state };
+};
+
+```
