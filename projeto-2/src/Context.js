@@ -1,33 +1,8 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useState } from 'react';
 
-const GlobalContext = createContext();
+import Div from './components/Div';
 
-const H1 = () => {
-  const { counter, title } = useContext(GlobalContext);
-  return (
-    <h1 className="h1">
-      {title} {counter}
-    </h1>
-  );
-};
-
-const Body = () => {
-  const { body, setCounter } = useContext(GlobalContext);
-  return (
-    <p className="p" onClick={() => setCounter((c) => c + 1)}>
-      {body}
-    </p>
-  );
-};
-
-const Div = () => {
-  return (
-    <div className="div">
-      <H1 />
-      <Body />
-    </div>
-  );
-};
+export const GlobalContext = createContext();
 
 const ContextApp = () => {
   return <Div />;
