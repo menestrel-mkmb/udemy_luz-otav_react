@@ -1,5 +1,39 @@
-import { useContext, useReducer, useRef } from 'react';
+import { useContext, useEffect, useReducer, useRef, useState } from 'react';
 import { GlobalContext } from './Context';
+
+const useMyHook = (cb, delay = 1000) => {
+  const saveCb = useRef();
+
+  useEffect(() => {
+    saveCb.current = cb;
+  }, [cb]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      saveCb.current();
+    }, delay);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [delay]);
+};
+
+const CustomHookApp = () => {
+  const [counter, setCounter] = useState(0);
+  const [delay, setDelay] = useState(1000);
+  const [incrementor, setIncrementor] = useState(100);
+
+  return (
+    <div>
+      <h2 onClick={useMyHook(() => setCounter((c) => c + 1), delay)}>Contador: {counter}</h2>
+      <p>Intervalo: {delay}</p>
+      <input type="number" value={incrementor} onChange={(e) => setIncrementor(Number(e.target.value))} />
+      <button onClick={() => setDelay((d) => d + incrementor)}>Incrementar intervalo</button>
+      <button onClick={() => setDelay((d) => d - incrementor)}>Decrementar intervalo</button>
+    </div>
+  );
+};
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -34,6 +68,7 @@ const ReducerApp = () => {
 
   return (
     <div className="App">
+      <CustomHookApp />
       <h2>
         {title} {counter}
       </h2>
