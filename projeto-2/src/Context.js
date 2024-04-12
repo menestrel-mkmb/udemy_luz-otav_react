@@ -4,17 +4,21 @@ const GlobalContext = createContext();
 const globalState = {
   title: 'Olá mundo',
   counter: 0,
+  body: 'Lorem123',
 };
 
 const H1 = () => {
-  const { globalState: theContext } = useContext(GlobalContext);
-  return <h1 className="h1">{theContext.title}</h1>;
+  const { globalState } = useContext(GlobalContext);
+  return <h1 className="h1">{globalState.title}</h1>;
 };
 
 const Div = () => {
+  const { globalState } = useContext(GlobalContext);
+
   return (
     <div className="div">
       <H1 />
+      <p className="p">{globalState.body}</p>
     </div>
   );
 };
