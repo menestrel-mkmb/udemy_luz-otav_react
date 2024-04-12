@@ -529,3 +529,45 @@ const Body = () => {
   );
 }
 ```
+
+### 5.7 - useReducer
+
+Nesse guia, já fora citado algumas vezes o fato de que, ao executar a atualização de um estado, e requisitar uma informação externa, seja de outro estado de componente ou requisição fora do aplicativo. Para o controle local, referências e componentes de estado são usados, para controle maior, usa-se referência e estado em um contexto e provém-se os componentes necessário desse contexto. Entretanto, ao executar ações entre componentes interligados, como no exemplo de `posts` e `filteredPosts`, há uma dificuldade em encontrar o estado desejável no programador iniciante, entretanto em contextos mais complexos, com paralelismo e carregamento parcial, isso também se torna um problema para programadores não iniciantes; uma forma de resolver essa questão é ter acesso ao contexto de estado completo, e reduzir quaisquer estado interno em uma ação, a esse hook, dar-se o nome de `useReducer`.
+
+Para declará-lo, uma desconstrução do estado e da função de ação armazena o hook, para utilizá-lo, é preciso determinar a função de controle de ações, com a mesma função de um parser, e declarar o objeto de chamada dos estados, normalmente vinculado a um contexto, bem como o gatilho de chamada ao parser, onde será definido o tipo de ação, e enviado qualquer dado obtido em tempo de execução para o dispatcher, conforme demonstrado abaixo:
+
+```
+const Reducer = () => {
+  ...
+  const [state, dispatch] = useReducer(reducer, useContext(GlobalContext));
+  const { counter, title, body } = state;
+  ...
+  return(
+    ...
+    <h2>
+        {title} {counter}
+    </h2>
+    <p>{body}</p>
+    <button onClick={() => dispatch({ type: 'increment', payload: 1 })}>+</button>
+    ...
+  )
+}
+```
+
+Também disposto a função do parser de ações:
+
+```
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'increment':
+      return { ...state, counter: state.counter + action.payload };
+    case 'other':
+      return {...}
+    ...
+  }
+  console.log('Nenhuma das ações anteriores foi executada');
+  return { ...state };
+};
+```
+
+Assim, o acesso aos estados de componentes é garantido de forma similar ao contexto, no `JSX` utiliza-se o dispatch em eventos sintéticos, e nele é declarado a ação, e qualquer dado necessário em tempo de execução.
