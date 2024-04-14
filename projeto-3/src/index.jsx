@@ -6,6 +6,7 @@ import './index.css';
 import { Abc } from './templates/Abc';
 import { App } from './templates/App';
 import { Page404 } from './templates/Page404';
+import ErrorCase from './templates/ErrorCase';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -14,6 +15,7 @@ ReactDOM.render(
       <Switch>
         <Route path="/abc" component={Abc} />
         <Route path="/" component={App} exact />
+        <Route path="/error" component={ErrorCase} exact />
         <Route path="*" component={Page404} />
       </Switch>
     </BrowserRouter>

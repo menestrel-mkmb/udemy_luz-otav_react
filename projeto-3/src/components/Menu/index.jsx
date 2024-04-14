@@ -13,6 +13,7 @@ export const Menu = () => {
     >
       <Link to="/">Home</Link>
       <Link to="/abc">Abc</Link>
+      <Link to="/error">ErrorCase</Link>
     </nav>
   );
 };
