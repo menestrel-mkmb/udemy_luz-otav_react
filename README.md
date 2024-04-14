@@ -238,7 +238,7 @@ Outro detalhe a ser adicionado é que o estado atual pode ser desconstruído par
 
 Com a utilização de hooks, é possível fazer a interação entre useState e useEffect em "iteração parcial" para garantir esse comportamento de forma simplificada.
 
-## 4 - Testes
+## 4.0 - Testes
 
 Com o conceito de entregas incrementais, e esteira de desenvolvimento contínuo e integrado, a utilização de testes se tornou fundamental para projetos de escopo maiores. Seja para garantir a consistência de features entre versões, como para verificar casos de borda (edge cases) de funcionamento do sistema, testar verificações fora do uso otimista de chamadas assíncronas, verificações pontuais de interface a partir de dados camuflados, e testar a robustez e a qualidade de anti-frágil de sistemas completos. Para cada funcionalidade e escopo de desenvolvimento há seu tipo de teste, sendo eles: unitários, de integração ou ponta a ponta/E2E (end-to-end).
 
@@ -292,7 +292,7 @@ Durante a execução do curso, as versões atuais dos pacotes não são mais com
 
 Ao final do curso será avaliada a necessidade de revisão desse módulo, e foi adiada unicamente por já ter explicitado o uso futuro no curso de tal recurso em projetos modernos, caso seja necessário, uma versão legada do projeto será criada nas exatas versões do atual módulo, para a amostragem de código.
 
-## 5 - React Hooks
+## 5.0 - React Hooks
 
 Os hooks foram desenvolvidos com o objetivo de centralizar o controle de ciclo de vida de componentes e estados de componentes internos para padronizar a solução de questões como `bind.this`, `componentDidMount`, `componentWillUnmount` e alguns problemas com chamadas assíncronas, aquisição de dados de estados passados de forma não proposital e para iniciar o processo de seleção de renderização usando memória e referências, para modificar menos componentes e aumentar a performance da biblioteca em cenários de muitas interações.
 
@@ -665,8 +665,50 @@ export const reducer = (state, action) => {
     }
   }
 
-  console.log('Não encontrei a action', action.type);
+  console.log('no action found', action.type);
   return { ...state };
 };
 
 ```
+
+## 6.0 - Error Boundaries
+
+Com a criação de uma página de forma modular, têm-se a necessidade de explicitar de forma independente quando o comportamento otimista não foi alcançado. Assim, quando um erro é apresentado, há uma prerrogativa de como o aplicativo deve se comportar e afetar de forma mínima a interação do usuário, e não quebrar a aplicação por completo, tal funcionalidade é denominada de `Error Boundaries`.
+
+Embora exista a necessidade de uso de um componente de classe para a criação desse contexto, visto que ainda não existe alternativa normativa para o método `componentDidCatch`, seu uso é simples, como demonstrado abaixo:
+
+```
+class CounterErrorBoundary extends Component {
+  ...
+  componentDidCatch...
+  ...
+  render() {
+    if (this.state.hasError) {
+      // Você pode renderizar qualquer UI alternativa
+      return <p>Deu ruim =(</p>;
+    }
+
+    return this.props.children;
+  }
+}
+```
+
+Uma verificação simples de error muda a renderização de seus filhos para um componente estático substituto indicativo de erro. Assim como contexto, e provedores, para gerenciar a composição de seus filhos é necessário encapsular o componente verificado, conforme demonstrado abaixo:
+
+```
+export const ErrorCase = () => {
+  ...
+  return (
+    <div>
+      <CounterErrorBoundary>
+        <ItWillThrowError />
+      </CounterErrorBoundary>
+      <CounterErrorBoundary>
+        <ItWillThrowError />
+      </CounterErrorBoundary>
+    </div>
+  );
+};
+```
+
+Assim, é possível demonstrar que a instância do componente que der erro, receberá uma renderização estática limitada de forma independente a outras instâncias, e o aplicativo pode funcionar de forma parcial, e minimizar o impacto ao usuário.
