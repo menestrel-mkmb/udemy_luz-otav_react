@@ -712,3 +712,9 @@ export const ErrorCase = () => {
 ```
 
 Assim, é possível demonstrar que a instância do componente que der erro, receberá uma renderização estática limitada de forma independente a outras instâncias, e o aplicativo pode funcionar de forma parcial, e minimizar o impacto ao usuário.
+
+## 7.0 - React Router DOM
+
+Para o contexto de aplicações SPA, têm-se o disposto de dinamicamente alocar os anós do VirtualDOM, em que apenas os componentes necessários são alterados suavizando as transições e aumentando a interatividade com o usuário, entretanto há um aspecto negativo na estrutura de navegação, criada com um paradigma `stateless`, que não consegue visualizar essas transições parciais, tornando de difícil acesso páginas de muitas interações e perdendo o contexto de navegabilidade, para isso há uma solução implementada em frameworks modernos embutida, mas a biblioteca do React não traz nada nativamente, para isso usa-se o pacote de rotas `react-router-dom`.
+
+O intuito desse módulo é permitir injeções de links estáticos levando direto para um estado de renderização do SPA, similar ao comportamento da web estática, e explicitar ao navegador o comportamento da página para permitir o uso de ferramentas como histórico, avançar e voltar páginas a partir da interação do usuário com o navegador, assim, têm-se os bônus de interatividade e fluidez de SPA, sem perder a estrutura já idealizada e mantida entre navegadores, aplicativos de acessibilidade e etc.
