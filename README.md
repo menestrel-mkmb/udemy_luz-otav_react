@@ -718,3 +718,24 @@ Assim, é possível demonstrar que a instância do componente que der erro, rece
 Para o contexto de aplicações SPA, têm-se o disposto de dinamicamente alocar os anós do VirtualDOM, em que apenas os componentes necessários são alterados suavizando as transições e aumentando a interatividade com o usuário, entretanto há um aspecto negativo na estrutura de navegação, criada com um paradigma `stateless`, que não consegue visualizar essas transições parciais, tornando de difícil acesso páginas de muitas interações e perdendo o contexto de navegabilidade, para isso há uma solução implementada em frameworks modernos embutida, mas a biblioteca do React não traz nada nativamente, para isso usa-se o pacote de rotas `react-router-dom`.
 
 O intuito desse módulo é permitir injeções de links estáticos levando direto para um estado de renderização do SPA, similar ao comportamento da web estática, e explicitar ao navegador o comportamento da página para permitir o uso de ferramentas como histórico, avançar e voltar páginas a partir da interação do usuário com o navegador, assim, têm-se os bônus de interatividade e fluidez de SPA, sem perder a estrutura já idealizada e mantida entre navegadores, aplicativos de acessibilidade e etc.
+
+### 7.1 - React Router DOM v5
+
+Assim como em Contexto e em casos de props que precisam de um fluxo, é necessário encapsular os componentes que serão selecionados para renderização do SPA, ou seja, a parte fixa deve ser separada da parte dinâmica a partir do `BrowserRouter`, há a possibilidade de trocar múltiplos componentes, ou utilizar rotas não exatas com templates, e por isso é necessário separar dentro do Provedor de Rotas alguns componentes como `Switch` ou `Router`, para renderizar as `Route` sendo indicadas por `exact` ou não para renderização inclusiva ou exclusiva. Para examplo, segue o código abaixo:
+
+```
+ReactDOM.render(
+  <BrowserRouter>
+    <Header />
+    <Switch>
+      <Route exact path='/' component={Home} />
+      <Route exact path='/profile' component={Profile} />
+      <Route exact path='/settings' component={Settings} />
+    </Switch>
+    <Footer />
+  </BrowserRouter>,
+  document.getElementById('root'),
+);
+```
+
+É importante citar que assim como no caso do contexto, a chamada de navegação, a partir de componentes como `Link` precisam estar encapsuladas no 'provedor', no código acima, os componentes `Header` e `Footer` podem conter as chamadas de redirecionamento de roteamento, além de todos os componentes chamados dentro de qualquer `Route`.
