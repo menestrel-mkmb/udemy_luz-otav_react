@@ -738,7 +738,7 @@ ReactDOM.render(
 );
 ```
 
-É importante citar que assim como no caso do contexto, a chamada de navegação, a partir de componentes como `Link` precisam estar encapsuladas no 'provedor', no código acima, os componentes `Header` e `Footer` podem conter as chamadas de redirecionamento de roteamento, além de todos os componentes chamados dentro de qualquer `Route`. Esse chamada por evento sintético é feita a partir de `<Link to='/path'>Path</Link>`.
+É importante citar que assim como no caso do contexto, a chamada de navegação, a partir de componentes como `Link` precisam estar encapsuladas no 'provedor', no código acima, os componentes `Header` e `Footer` podem conter as chamadas de redirecionamento de roteamento, além de todos os componentes chamados dentro de qualquer `Route`. Esse chamada por evento sintético é feita a partir de `<Link to='/path'>Path</Link>`. Se for necessário requisitar a localização atual da rota, pode ser utilizado o hook do `useLocation`.
 
 Para renderização dinâmica de páginas de template, como por exemplo uma página de um produto com um ID, um post com uma data é necessário passar parâmetros para aninhar a renderização de componentes, normalmente de artigos ou cards, ou detalhes de uma lista, para isso é utilizado o modelo abaixo:
 
@@ -765,4 +765,8 @@ Outra informação importante é uma rota normalmente utilizada para capturar er
 <Route path='*' component={NotFound} />
 ```
 
-Entretanto, cabe o aviso de que o comportamento usual é apresentar essa rota UNICAMENTE quando não tiver uma página, sendo assim ela deve ser encapsulada por `Switch` ou por algo que determina rota ÚNICA, e deve estar na última posição de verificação, pois se for utilizada antes de uma rota existente, a mesma não será utilizada.
+Entretanto, cabe o aviso de que o comportamento usual é apresentar essa rota UNICAMENTE quando não tiver uma página, sendo assim ela deve ser encapsulada por `Switch` ou por algo que determina resposta ÚNICA, e deve estar na última posição de verificação, pois se for utilizada antes de uma rota existente, a mesma não será utilizada.
+
+A biblioteca SPA utiliza os componentes `Link`, conforme visto anteriormente, na tentativa de evitar o carregamento completo e stateless anteriormente citado.
+
+Para utilizar o roteamento dentro de hooks ou funções, como ações de efeito colateral a partir de interação do usuário, é possível utilizar hooks como o `useHistory`.
