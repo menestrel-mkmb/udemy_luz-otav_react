@@ -4,8 +4,6 @@ import { useCounterContext } from '../../contexts/CounterContext';
 export const Home = () => {
   const [state, actions] = useCounterContext();
 
-  console.log('actions', actions);
-
   useEffect(() => {
     actions.increment();
   }, [actions]);

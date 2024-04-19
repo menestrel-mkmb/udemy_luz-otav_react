@@ -15,8 +15,6 @@ export const CounterContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const actions = useRef(buildActions(dispatch));
 
-  console.log('actions', actions);
-
   return <Context.Provider value={[state, actions.current]}>{children}</Context.Provider>;
 };
 
