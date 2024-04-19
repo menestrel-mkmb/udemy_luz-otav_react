@@ -770,3 +770,55 @@ Entretanto, cabe o aviso de que o comportamento usual é apresentar essa rota UN
 A biblioteca SPA utiliza os componentes `Link`, conforme visto anteriormente, na tentativa de evitar o carregamento completo e stateless anteriormente citado.
 
 Para utilizar o roteamento dentro de hooks ou funções, como ações de efeito colateral a partir de interação do usuário, é possível utilizar hooks como o `useHistory`.
+
+### 7.2 - React Router DOM v6
+
+Uma grande mudança de estrutura foi feita na atualização do Router DOM v5 para a v6. Para começar, o componente de renderização única mudou de `Switch` para `Routes`, o parâmetro de `component` mudou para `element`, não é necessário mais utilizar o parâmetro `exact` para limitar o escopo navegação.
+
+A especificidade de páginas é dita como automática, sendo assim, o contexto de múltiplas páginas intermediárias da seção anterior não é mais uma obrigação, entretanto continua como boa prática, para compatibilidade de versionamento.
+
+Para utilizar os parâmetros de url como query, existe o hook `useSearchParams`, outros hooks também sofreram alteração como o de redirecionamento via função ou hooks, sendo o mais atual o `useNavigate`.
+
+Em frameworks modernos, como o Next.js, há uma estrutura automática de rotas aninhadas, inclusive dinâmicas, e para a biblioteca pura, o módulo de roteamento também possui o aninhamento. No arquivo de definição de rotas, é preciso definir as renderizações aninhadas como um componente rota filho do componente determinado na rota parent utilizando o caminho relativo, como demonstrado abaixo:
+
+```
+  <Route path='/video' element={<Video />}>
+    <Route path=":id" element={<Comments />} />
+  </Route>
+```
+
+Entretanto, aqui surgiria a dúvida, onde esse componente filho deve ser aninhado? Apenas um `append` no final da página? Como fazer essa escolha? Para isso existe o componente de `Outlet`, que determina tal posição:
+
+```
+const Videos = () => {
+  ...
+  return(
+    ...
+    <Outlet />
+    ...
+  )
+}
+```
+
+Uma forma simplificada de fazer a transferência de valores e estados entre componentes de diferentes rotas sem a utilização de props ou contextos, o roteamento provêm uma forma simplificada de envio a partir de um objeto em algumas funções, como:
+
+```
+  ...
+  const navigate = useNavigate();
+  ...
+
+    navigate('/to/other/page', { state: 'transfer between routes'})
+  ...
+```
+
+E para receber esses valores dentro de um componente dentro da rota nova é preciso utilizar a desconstrução de um hook como o `useLocation`, outra forma é enviar esse estado como uma `props` dentro de `Route`:
+
+```
+  const { state } = useLocation();
+
+  return(
+    ...
+    <p>{state}</p>
+    ...
+  )
+```
