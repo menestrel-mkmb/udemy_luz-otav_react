@@ -738,4 +738,13 @@ ReactDOM.render(
 );
 ```
 
-É importante citar que assim como no caso do contexto, a chamada de navegação, a partir de componentes como `Link` precisam estar encapsuladas no 'provedor', no código acima, os componentes `Header` e `Footer` podem conter as chamadas de redirecionamento de roteamento, além de todos os componentes chamados dentro de qualquer `Route`.
+É importante citar que assim como no caso do contexto, a chamada de navegação, a partir de componentes como `Link` precisam estar encapsuladas no 'provedor', no código acima, os componentes `Header` e `Footer` podem conter as chamadas de redirecionamento de roteamento, além de todos os componentes chamados dentro de qualquer `Route`. Esse chamada por evento sintético é feita a partir de `<Link to='/path'>Path</Link>`.
+
+Para renderização dinâmica de páginas de template, como por exemplo uma página de um produto com um ID, um post com uma data é necessário passar parâmetros para aninhar a renderização de componentes, normalmente de artigos ou cards, ou detalhes de uma lista, para isso é utilizado o modelo abaixo:
+
+```
+<Route exact path='/posts/:year/:month/:day/:id' component={Post} />
+<Route exact path='/products/:tech?/:id?' component={Product} />
+```
+
+Para fazer a aquisição desse valor e tratar no contexto do componente do SPA, é necessário utilizar o hook `useParams`, que irá parsear automaticamente o valor dos parâmetros, caso haja sentido uma renderização template sem um slug específico, o parâmetro pode ser definido como opcional, como visto em `:tech?` e `:id?`.
