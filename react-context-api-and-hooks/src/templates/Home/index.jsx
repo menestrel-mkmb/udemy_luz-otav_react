@@ -1,11 +1,18 @@
+import { useEffect, useState } from 'react';
 import { useCounterContext } from '../../contexts/CounterContext';
 
 export const Home = () => {
-  const [state, action] = useCounterContext();
+  const [state, actions] = useCounterContext();
+
+  console.log('actions', actions);
+
+  useEffect(() => {
+    actions.increment();
+  }, [actions]);
 
   return (
     <div>
-      <h1 onClick={() => action.increment()}>Oi</h1>
+      <h1 onClick={() => actions.increment()}>Oi</h1>
       <h1>{state.counter}</h1>
     </div>
   );
