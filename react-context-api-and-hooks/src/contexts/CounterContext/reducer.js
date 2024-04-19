@@ -10,14 +10,14 @@ export const reducer = (state, action) => {
       };
     }
     case actionTypes.DECREMENT: {
-      if (state.counter === 0) return;
+      if (state.counter === 0) return state;
       return {
         ...state,
         counter: state.counter - 1,
       };
     }
     case actionTypes.SET_COUNTER: {
-      if (typeof action.payload !== 'number') return;
+      if (typeof action.payload !== 'number') return state;
       return {
         ...state,
         counter: action.payload,
