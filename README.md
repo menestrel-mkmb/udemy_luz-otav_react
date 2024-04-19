@@ -748,3 +748,21 @@ Para renderização dinâmica de páginas de template, como por exemplo uma pág
 ```
 
 Para fazer a aquisição desse valor e tratar no contexto do componente do SPA, é necessário utilizar o hook `useParams`, que irá parsear automaticamente o valor dos parâmetros, caso haja sentido uma renderização template sem um slug específico, o parâmetro pode ser definido como opcional, como visto em `:tech?` e `:id?`.
+
+Entretanto, caso existam múltiplas páginas intermediárias, uma boa prática é utiliizar o caminho do mais específico para o menos específico, sendo assim utilizar algo como:
+
+```
+<Route exact path='/posts/:year/:month/:day/:id' component={Post} />
+<Route exact path='/posts/:year/:month/:day' component={Post} />
+<Route exact path='/posts/:year/:month' component={Post} />
+```
+
+Assim, Caso não exista um parâmetro de ID da notícia diária, a página modelo de posts do dia será renderizada, senão, os posts mensais, e assim por diante.
+
+Outra informação importante é uma rota normalmente utilizada para capturar erros de digitação (do usuário ou programador), ou qualquer mudança de estrutura de pastas, com isso utilizando uma rota catchAll, que contém similitude ao código de erro status 404, pode ser criada com a biblioteca de roteamento utilizando a prop `path="*"` dentro de um componente de rota, conforme demonstrado abaixo:
+
+```
+<Route path='*' component={NotFound} />
+```
+
+Entretanto, cabe o aviso de que o comportamento usual é apresentar essa rota UNICAMENTE quando não tiver uma página, sendo assim ela deve ser encapsulada por `Switch` ou por algo que determina rota ÚNICA, e deve estar na última posição de verificação, pois se for utilizada antes de uma rota existente, a mesma não será utilizada.
