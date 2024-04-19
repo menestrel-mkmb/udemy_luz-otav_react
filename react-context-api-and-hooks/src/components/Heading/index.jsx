@@ -1,8 +1,6 @@
 import P from 'prop-types';
-export const Heading = ({ children }) => {
-  return <h1>{children}</h1>;
-};
-
-Heading.propTypes = {
-  children: P.node.isRequired,
+import { useCounterContext } from '../../contexts/CounterContext';
+export const Heading = () => {
+  const [state] = useCounterContext();
+  return <h1>{state.counter}</h1>;
 };
