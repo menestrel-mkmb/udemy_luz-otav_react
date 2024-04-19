@@ -1,7 +1,9 @@
 import { useEffect } from 'react';
 import { useCounterContext } from '../../contexts/CounterContext';
 import './styles.css';
+
 import { Button } from '../../components/Button';
+import { Heading } from '../../components/Heading';
 
 export const Home = () => {
   const [state, actions] = useCounterContext();
@@ -12,7 +14,7 @@ export const Home = () => {
 
   return (
     <div>
-      <h2>{state.counter}</h2>
+      <Heading>{state.counter}</Heading>
       <input type="number" value={state.counter} onChange={(e) => actions.setCounter(Number(e.target.value))} />
       <section>
         <Button onClick={() => actions.decrement()}>-</Button>
