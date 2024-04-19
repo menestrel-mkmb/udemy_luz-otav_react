@@ -14,13 +14,14 @@ export const Home = () => {
 
   return (
     <div>
-      <Heading>{state.counter}</Heading>
+      <Heading />
       <input type="number" value={state.counter} onChange={(e) => actions.setCounter(Number(e.target.value))} />
       <section>
         <Button onClick={() => actions.decrement()}>-</Button>
         <Button onClick={() => actions.reset()}>Reset</Button>
         <Button onClick={() => actions.increment()}>+</Button>
       </section>
+      <section></section>
     </div>
   );
 };
