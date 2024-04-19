@@ -7,6 +7,7 @@ import { buildActions } from './build-actions';
 export const initialState = {
   counter: 0,
   loading: false,
+  error: null,
 };
 
 const Context = createContext();

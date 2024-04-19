@@ -43,6 +43,7 @@ export const reducer = (state, action) => {
       return {
         ...state,
         loading: false,
+        error: true,
       };
     }
   }
