@@ -1,4 +1,4 @@
-import { initialState } from './index';
+import { initialState } from '.';
 import * as actionTypes from './actions-types';
 
 export const reducer = (state, action) => {
@@ -26,6 +26,26 @@ export const reducer = (state, action) => {
     case actionTypes.RESET: {
       return { ...initialState };
     }
+    case actionTypes.ASYNC_INCREMENT_START: {
+      return {
+        ...state,
+        loading: true,
+      };
+    }
+    case actionTypes.ASYNC_INCREMENT_END: {
+      return {
+        ...state,
+        loading: false,
+        counter: state.counter + 1,
+      };
+    }
+    case actionTypes.ASYNC_INCREMENT_ERROR: {
+      return {
+        ...state,
+        loading: false,
+      };
+    }
   }
+
   return state;
 };
